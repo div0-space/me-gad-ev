@@ -6,12 +6,15 @@ import json
 import os
 from pathlib import Path
 from threading import RLock
-from typing import Annotated, Any
+from typing import TYPE_CHECKING, Annotated, Any
 
 from fastapi import Body, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
+
+if TYPE_CHECKING:
+    from server.gate import Gate
 
 Text = Annotated[str, Field(strict=True, min_length=1, max_length=20000, pattern=r"\S")]
 # Argument names and required sets mirror the official course MCP 1:1
@@ -253,8 +256,11 @@ class CourseStore:
         return result
 
 
-def create_app(store: CourseStore | None = None) -> FastAPI:
+def create_app(store: CourseStore | None = None, gate: "Gate | None" = None) -> FastAPI:
+    from server.gate import Gate, create_gate_router
     from server.mcp_server import create_mcp
+
+    gate = gate or Gate.from_env()
 
     if store is None:
         snapshot = os.environ.get("MOCK_SNAPSHOT")
@@ -293,5 +299,7 @@ def create_app(store: CourseStore | None = None) -> FastAPI:
     def call_tool(tool: str, arguments: Annotated[dict[str, Any], Body()]):
         return store.call(tool, arguments)
 
+    app.state.gate = gate
+    app.include_router(create_gate_router(gate))
     app.mount("/", mcp_app)
     return app

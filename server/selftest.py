@@ -173,6 +173,77 @@ def exercise():
                 raise AssertionError("invalid failure interval accepted")
 
 
+def exercise_gate():
+    """Proof-of-MCP gate: question -> wrong 401 -> right sets cookie -> check 200; forgeries 401."""
+    sys.path.insert(0, str(ROOT))
+    from fastapi.testclient import TestClient
+    from server.app import CourseStore, create_app
+    from server.gate import COOKIE, Gate
+
+    now = [1_800_000_000.0]
+    with tempfile.TemporaryDirectory(prefix="mock-gate-selftest-") as temporary:
+        expected_file = Path(temporary) / "expected.txt"
+        expected_file.write_text("  Teacup-42\n")
+        gate = Gate(secret="selftest-secret-not-a-credential", expected_file=expected_file,
+                    question="SELFTEST-What is the word of the day?", clock=lambda: now[0], max_failures=4)
+        # https base: the cookie is Secure, and the client jar honours that like a browser.
+        with TestClient(create_app(CourseStore(), gate=gate), base_url="https://gate.test") as client:
+            question = client.get("/gate/question")
+            require(question.status_code == 200 and question.json()["question"].startswith("SELFTEST-"), "gate question")
+            require("official" in question.json()["instruction"], "gate question instructs the agent")
+            require(client.get("/gate/check").status_code == 401, "check without cookie")
+            bad = client.post("/gate/verify", json={"answer": "wrong"})
+            require(bad.status_code == 401 and bad.json()["error"] == "gate-wrong-answer", "wrong answer")
+            require(COOKIE not in bad.cookies and client.get("/gate/check").status_code == 401, "no cookie on failure")
+            for malformed in ({}, {"answer": 7}, {"answer": "  "}, {"answer": "x" * 501}, []):
+                require(client.post("/gate/verify", json=malformed).status_code == 422, f"malformed {malformed!r}")
+            require(client.post("/gate/verify", content=b"{", headers={"content-type": "application/json"})
+                    .status_code == 422, "non-JSON body")
+            good = client.post("/gate/verify", json={"answer": " TEACUP-42 "})
+            require(good.status_code == 200 and good.json()["ok"], "right answer, normalised")
+            header = good.headers["set-cookie"]
+            require(all(flag in header for flag in ("HttpOnly", "Secure", "Max-Age=86400", "SameSite=lax")),
+                    f"cookie flags: {header}")
+            require(client.get("/gate/check").status_code == 200, "check with cookie")
+            token = client.cookies[COOKIE]
+            # Forgeries: tampered signature, tampered expiry, garbage, wrong secret.
+            expires, _, signature = token.partition(".")
+            other = Gate(secret="another-selftest-secret-xxx", clock=lambda: now[0]).issue()
+            for forged in (f"{expires}.{'0' * len(signature)}", f"{int(expires) + 86400}.{signature}",
+                           "garbage", ".", other, f"-1.{signature}"):
+                client.cookies.clear()
+                client.cookies.set(COOKIE, forged, domain="gate.test")
+                require(client.get("/gate/check").status_code == 401, f"forged cookie accepted: {forged}")
+            client.cookies.clear()
+            client.cookies.set(COOKIE, token, domain="gate.test")
+            require(client.get("/gate/check").status_code == 200, "genuine cookie still fine")
+            now[0] += 24 * 60 * 60 + 1
+            require(client.get("/gate/check").status_code == 401, "cookie expires after 24 h")
+            # Rotation without restart: the file changes, the old answer stops working.
+            expected_file.write_text("kettle-7\n")
+            require(client.post("/gate/verify", json={"answer": "teacup-42"}).status_code == 401, "rotated away")
+            require(client.post("/gate/verify", json={"answer": "Kettle-7"}).status_code == 200, "rotated in")
+            # Brute force: the 4th wrong answer from one address locks it out, even for the right one.
+            fresh = Gate(secret="selftest-secret-not-a-credential", expected="a", question="q",
+                         clock=lambda: now[0], max_failures=4)
+            with TestClient(create_app(CourseStore(), gate=fresh), base_url="https://gate.test") as brute:
+                for _ in range(4):
+                    require(brute.post("/gate/verify", json={"answer": "b"}).status_code == 401, "wrong")
+                require(brute.post("/gate/verify", json={"answer": "a"}).status_code == 429, "throttled")
+                now[0] += 601
+                require(brute.post("/gate/verify", json={"answer": "a"}).status_code == 200, "window passes")
+        # Fail closed: no secret, no short secret, no answer, no question => 503, never a pass.
+        for broken in (Gate(expected="a", question="q"), Gate(secret="short", expected="a", question="q"),
+                       Gate(secret="selftest-secret-not-a-credential", question="q")):
+            with TestClient(create_app(CourseStore(), gate=broken), base_url="https://gate.test") as closed:
+                require(closed.post("/gate/verify", json={"answer": "a"}).status_code == 503, "unconfigured verify")
+                require(closed.get("/gate/check").status_code in {401, 503}, "unconfigured check")
+        with TestClient(create_app(CourseStore(), gate=Gate(secret="selftest-secret-not-a-credential")),
+                        base_url="https://gate.test") as bare:
+            require(bare.get("/gate/question").status_code == 503, "no question configured")
+            require(bare.get("/health").json()["synthetic"], "gate does not shadow the mock routes")
+
+
 def main():
     logging.disable(logging.INFO)
     # `uv sync --project server` supplies a local interpreter without mutating system Python.
@@ -189,6 +260,7 @@ def main():
         with patch("socket.socket.connect", side_effect=AssertionError("selftest attempted network I/O")), \
                 patch("socket.socket.connect_ex", side_effect=AssertionError("selftest attempted network I/O")):
             exercise()
+            exercise_gate()
     except Exception as error:
         print(f"{type(error).__name__}: {error}", file=sys.stderr)
         print("today=mock-missing")
