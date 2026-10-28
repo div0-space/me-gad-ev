@@ -2,10 +2,12 @@
 # PROPOSAL ONLY. Nothing in this repo applies it; the operator pastes it (see below).
 #
 # What it does
-#   /challenge/s01e01|s01e02|s01e03 (and everything below them) ask the gate app
-#   (127.0.0.1:8000, GET /gate/check) before Caddy serves the file. A valid
-#   `megadev_gate` cookie => 200 => the page is served. Anything else => redirect to
-#   /gate/?next=<path>. The index /challenge/ and all other static files are untouched.
+#   /challenge/s01e0X/entry/ (the course's verbatim entries) ask the gate app
+#   (127.0.0.1:8000, GET /gate/check) before Caddy serves the file — and the files
+#   come from a SEPARATE root (/srv/megadev-gated) that is not in the public repo.
+#   A valid `megadev_gate` cookie => 200 => the entry is served. Anything else =>
+#   redirect to /gate/?next=<path>. Teaser pages /challenge/s01e0X/, the index
+#   /challenge/ and all other static files are untouched and public.
 #
 # Operator steps
 #   1. Put the gate app's env in its unit/env file (never in the repo):
@@ -24,8 +26,8 @@
 #        curl -s  https://megadev.div0.space/gate/question                    # question JSON
 #        curl -si https://megadev.div0.space/challenge/                       # 200, still public
 #
-# Caveat: the same pages live in the public GitHub repo (docs/challenge/s01e0*/). The gate
-# protects the website, not the repo. See server/README.md, "Gate".
+# The gated entries live only under /srv/megadev-gated on the host — they are not in
+# the public repo. See server/README.md, "Gate".
 
 # Block 1 — the gate's own endpoints, public, proxied to the app.
 @gate_api path /gate/question /gate/verify /gate/check
@@ -37,7 +39,7 @@ handle @gate_api {
 # path matcher and the redirect silently never fires (tested; the page then fails OPEN).
 # This block was run end to end against the gate app: 302 without cookie, 200 with, 502 if the
 # gate is down (closed). `path` matching is case-insensitive and normalised by Caddy.
-@gated path /challenge/s01e01 /challenge/s01e01/* /challenge/s01e02 /challenge/s01e02/* /challenge/s01e03 /challenge/s01e03/*
+@gated path /challenge/s01e01/entry /challenge/s01e01/entry/* /challenge/s01e02/entry /challenge/s01e02/entry/* /challenge/s01e03/entry /challenge/s01e03/entry/*
 handle @gated {
 	forward_auth 127.0.0.1:8000 {
 		uri /gate/check
@@ -47,6 +49,6 @@ handle @gated {
 			redir * /gate/?next={http.request.orig_uri.path} 302
 		}
 	}
-	root * /srv/megadev-landing
+	root * /srv/megadev-gated
 	file_server
 }
