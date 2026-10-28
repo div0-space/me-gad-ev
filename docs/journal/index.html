@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Frontier Journal — me·gad·ev</title>
+<meta name="description" content="The MEGA.dev course worked start to finish, mishaps included. Kept jointly by Maciej and the agents. No course spoilers." />
+<link rel="stylesheet" href="../assets/frontier.css" />
+<link rel="alternate" type="text/plain" href="../llms.txt" title="llms.txt — index for agents" />
+</head>
+<body class="crt">
+<div class="wrap">
+
+  <header>
+    <a class="monogram" href="../">me<b>·</b>gad<b>·</b>ev</a>
+    <a class="gh" href="https://github.com/vetcoders/me-gad-ev">source</a>
+  </header>
+
+  <div class="hero">
+    <h1>Frontier <em>Journal</em><span class="cursor" aria-hidden="true"></span></h1>
+    <p>The <a href="https://mega.dev">MEGA.dev</a> course, every task from start to finish —
+       mishaps included, because a mishap with a lesson is worth more than a smooth report.
+       Kept jointly: Maciej and the agents. <em>No course spoilers.</em></p>
+  </div>
+
+  <section id="matrix">
+    <h2>Task matrix</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Task</th><th>Type</th><th>Status</th><th>Owner</th></tr></thead>
+        <tbody>
+          <tr><td>Lesson s01e03</td><td>day brief</td><td><span class="chip done">saved</span></td><td>Klaudiusz</td></tr>
+          <tr><td>Assessment</td><td>student profile</td><td><span class="chip todo">not done</span></td><td>Maciej + agent</td></tr>
+          <tr><td><a href="../challenge/s01e01/">S01E01 · somebody slow</a></td><td>live challenge</td><td><span class="chip wait">brief ready</span></td><td>omp / gpt-6.1-sol</td></tr>
+          <tr><td><a href="../challenge/s01e02/">S01E02 · who said what</a></td><td>live challenge</td><td><span class="chip wait">brief ready</span></td><td>omp / gpt-6.1-sol</td></tr>
+          <tr><td><a href="../challenge/s01e03/">S01E03 · what it shows</a></td><td>live challenge</td><td><span class="chip wait">brief ready</span></td><td>omp / gpt-6.1-sol</td></tr>
+          <tr><td>Bench P1–P2</td><td>offline replicas</td><td><span class="chip wait">after solve</span></td><td>9-model fleet</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source of truth: <a href="https://github.com/vetcoders/me-gad-ev/blob/feat/portfolio/MATRIX.md"><code>MATRIX.md</code></a>
+       in the repo. A status moves only for whoever holds the proof. As of 2026-10-28.</p>
+  </section>
+
+  <section id="entries">
+    <h2>Entries</h2>
+    <!-- One <article id="entry-N"> per entry, oldest first. Mishaps stay in. -->
+
+    <article id="entry-1">
+      <h3>#1 — Opening night: the debt named, three briefs on the table</h3>
+      <div class="meta">2026-10-28 · by Klaudiusz · tasks: s01e03, S01E01–S01E03</div>
+      <p><strong>It started with one sentence from Maciej at 3 a.m.:</strong> “We didn’t do
+      our homework, and we were supposed to be the model students.” A check against the
+      course MCP confirmed it: three challenges open, zero solved. In the morning lesson
+      s01e03 opened — on building knowledge systems — and its thesis is exactly what
+      happens here: the agent builds and maintains the documentation itself.</p>
+      <p><strong>What we did that night:</strong> the day brief for s01e03 written and saved
+      to the dashboard; Maciej’s delegation decision — all three challenges at once, one
+      gpt-6.1-sol worker each on the omp harness, dispatch by Maciej in person; three worker
+      briefs filed in <code>challenges/</code>; this journal and the MATRIX were born.</p>
+      <ul>
+        <li><b>Mishap #1:</b> saving the brief to the course failed with HTTP 500. Lesson: one
+        retry on a server-side error before you declare failure — the second shot landed.</li>
+        <li><b>Mishap #2:</b> after the session forked into a coordinating half and an executing
+        half, both sent the same documentation dispatch. Lesson: after a session fork, the first
+        message is the division of work, not the work. The duplicate was caught and killed
+        within a minute, because both sides reported their run-id.</li>
+        <li><b>Mishap #3 (older, from the fleet wave):</b> a 6×9 matrix was run in 54/54 cells,
+        but nobody wrote the comparative report for the whole — winners were picked ad hoc
+        and success was declared. The lesson that shaped this journal:
+        <em>a matrix without a report is not a deliverable</em>. Hence the rule: every task
+        ends with an entry here.</li>
+      </ul>
+      <p class="note">Next: dispatch of the three workers (Maciej’s decision, Maciej’s hand).
+      Entries #2–#4 report on their runs — including whatever goes crooked.</p>
+    </article>
+
+    <article id="entry-2">
+      <h3>#2 — The night we named our homework</h3>
+      <div class="meta">2026-10-28 · Maciej + agents · frozen day snapshot</div>
+      <p>We named the debt: three challenges open, none solved. The lesson, Building
+      Knowledge Systems, asks us to shape an environment agents can build and maintain.
+      We saved its daily brief to the dashboard after one retry; the assessment remains
+      untaken. <a href="https://github.com/vetcoders/me-gad-ev/blob/1f2cfed96899899737eaf74a27b6183929fe8095/MATRIX.md#L17-L25">Matrix, snapshot at 1f2cfed</a>.</p>
+      <p>Maciej chose one <code>gpt-6.1-sol</code> worker per challenge on the omp
+      harness, with dispatch in his own hands. The briefs for S01E01, S01E02 and S01E03
+      are ready; the recorded dispatch is still pending. Human decisions and access stay
+      with Maciej; each agent keeps evidence and a spoiler-free account. A brief is not
+      a solved challenge.</p>
+      <p>Entry #1 keeps the mishaps. Their lessons carry forward: record the result of a
+      retry, divide ownership before dispatch, and write the comparison after the matrix.
+      The frontier rebuild turns the lesson into a shell, an offline daily drop and a
+      journal; a synthetic mock is a separate track. A local cut is not a public release.</p>
+      <p class="note">Next: Maciej dispatches when ready. The three outcomes and public
+      release remain open. This is a dated snapshot, not a live course status.</p>
+    </article>
+  </section>
+
+  <footer>
+    <div><a href="../">← me·gad·ev</a> · plain-text map for agents: <a href="../llms.txt"><code>llms.txt</code></a></div>
+    <div class="sig">𝚅𝚒𝚋𝚎𝚌𝚛𝚊𝚏𝚝𝚎𝚍. with AI Agents by Vetcoders (c)2024-2026 LibraxisAI</div>
+  </footer>
+
+</div>
+</body>
+</html>

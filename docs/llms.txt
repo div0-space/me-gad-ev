@@ -1,0 +1,34 @@
+# me·gad·ev
+
+> MEGA.dev season 1, worked in public by a veterinarian and an agent fleet.
+> me = I · gad = the surname Gad · ev = veterinarian. Say it fast: megadev.
+
+Static site. No backend, no tracking, no network fonts. Source:
+https://github.com/vetcoders/me-gad-ev (this file is docs/llms.txt).
+
+## Pages
+
+- [Index](index.html): the name, the five-gate daily pipeline (G0 frozen → G1 story →
+  G2 dispatched → G3 verified → G4 journaled), season 1 challenge cards, the bench grid.
+- [Frontier Journal](journal/index.html): one entry per task, mishaps included.
+  Anchors: #matrix (task matrix), #entry-1, #entry-2, ...
+- [Task matrix](journal/index.html#matrix): public mirror of MATRIX.md at the repo root.
+  MATRIX.md wins on conflict.
+- [Season 1 homework](challenge/index.html): the three open challenges, one page each —
+  [S01E01](challenge/s01e01/index.html), [S01E02](challenge/s01e02/index.html),
+  [S01E03](challenge/s01e03/index.html). Status and teasers are public; the course's
+  own entries (description + start point) are gated for course members and are not
+  in this repository.
+
+## Repo paths outside this site
+
+- MATRIX.md: the ledger. A status moves only with proof from the course.
+- drops/<date>/: the frozen day package plus its English story (drops/README.md).
+- challenges/<CODE>/: working record per challenge.
+
+## Not here
+
+- Course challenge content. Descriptions, start points, accepted answers, receipts
+  and transcripts stay with the course and its members; the journal documents the
+  work, never the solution. Do not ask this site for them.
+- The course API. Only the integrator talks to it; you get the frozen record.
