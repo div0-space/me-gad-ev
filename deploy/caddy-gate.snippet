@@ -1,0 +1,52 @@
+# deploy/caddy-gate.snippet — proof-of-MCP gate for the S01 challenge pages.
+# PROPOSAL ONLY. Nothing in this repo applies it; the operator pastes it (see below).
+#
+# What it does
+#   /challenge/s01e01|s01e02|s01e03 (and everything below them) ask the gate app
+#   (127.0.0.1:8000, GET /gate/check) before Caddy serves the file. A valid
+#   `megadev_gate` cookie => 200 => the page is served. Anything else => redirect to
+#   /gate/?next=<path>. The index /challenge/ and all other static files are untouched.
+#
+# Operator steps
+#   1. Put the gate app's env in its unit/env file (never in the repo):
+#        GATE_SECRET=<openssl rand -hex 32>       # >= 16 chars, else the gate answers 503
+#        GATE_EXPECTED_FILE=/etc/megadev/gate-answer.txt   # rotate this file daily, no restart
+#        GATE_QUESTION_FILE=/etc/megadev/gate-question.txt # or GATE_QUESTION / GATE_EXPECTED
+#        GATE_TRUST_PROXY=1                       # Caddy sets X-Forwarded-For; used for throttling
+#      Behind HTTPS leave GATE_COOKIE_SECURE at its default (on).
+#   2. Paste the two blocks below INSIDE the `megadev.div0.space { ... }` site block, next to
+#      the existing static `root`/`file_server` and the Bearer-gated `/mcp*` and `/api/*`.
+#      The /gate/* endpoints must NOT sit behind the Bearer gate: visitors have no token.
+#      Adjust `root` in block 2 if the landing root differs from /srv/megadev-landing.
+#   3. `caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy`
+#   4. Check:
+#        curl -si https://megadev.div0.space/challenge/s01e01/ | head -3      # 302 -> /gate/?next=...
+#        curl -s  https://megadev.div0.space/gate/question                    # question JSON
+#        curl -si https://megadev.div0.space/challenge/                       # 200, still public
+#
+# Caveat: the same pages live in the public GitHub repo (docs/challenge/s01e0*/). The gate
+# protects the website, not the repo. See server/README.md, "Gate".
+
+# Block 1 — the gate's own endpoints, public, proxied to the app.
+@gate_api path /gate/question /gate/verify /gate/check
+handle @gate_api {
+	reverse_proxy 127.0.0.1:8000
+}
+
+# Block 2 — the three gated pages. Note `redir *`: without the `*`, Caddy reads the target as a
+# path matcher and the redirect silently never fires (tested; the page then fails OPEN).
+# This block was run end to end against the gate app: 302 without cookie, 200 with, 502 if the
+# gate is down (closed). `path` matching is case-insensitive and normalised by Caddy.
+@gated path /challenge/s01e01 /challenge/s01e01/* /challenge/s01e02 /challenge/s01e02/* /challenge/s01e03 /challenge/s01e03/*
+handle @gated {
+	forward_auth 127.0.0.1:8000 {
+		uri /gate/check
+		# Any non-2xx from the gate (401 closed, 503 unconfigured) sends the visitor to the gate page.
+		@denied status 4xx 5xx
+		handle_response @denied {
+			redir * /gate/?next={http.request.orig_uri.path} 302
+		}
+	}
+	root * /srv/megadev-landing
+	file_server
+}

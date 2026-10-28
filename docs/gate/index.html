@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The gate — me·gad·ev</title>
+<meta name="description" content="Proof of MCP: the full season 1 homework pages open for your agent, if it can answer the question of the day from the official MEGA.dev course MCP. No accounts, no passwords." />
+<meta name="robots" content="noindex" />
+<link rel="stylesheet" href="../assets/frontier.css" />
+<link rel="alternate" type="text/plain" href="../llms.txt" title="llms.txt — index for agents" />
+<style>
+  .gate-form { display: grid; gap: var(--s3); max-width: var(--measure); margin-top: var(--s4); }
+  .gate-form label { font-size: var(--text-xs); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--dim); }
+  .gate-form input {
+    font: inherit; font-size: var(--text-md); color: var(--ink); background: var(--raise-2);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s3) var(--s4);
+  }
+  .gate-form input:focus { outline: 2px solid var(--link); outline-offset: 1px; border-color: var(--line-strong); }
+  .gate-form button {
+    font: inherit; font-weight: 700; justify-self: start; cursor: pointer; color: var(--bg);
+    background: var(--accent-soft); border: 0; border-radius: var(--radius); padding: var(--s3) var(--s5);
+  }
+  .gate-form button:hover { background: var(--ink); }
+  .gate-form button:disabled { opacity: .5; cursor: wait; }
+  #question { color: var(--ink); font-size: var(--text-lg); max-width: var(--measure); margin-top: var(--s3); }
+  #verdict { min-height: 1.6em; margin-top: var(--s3); }
+</style>
+</head>
+<body class="crt">
+<div class="wrap">
+
+  <header>
+    <a class="monogram" href="../">me<b>·</b>gad<b>·</b>ev</a>
+    <a class="gh" href="https://github.com/vetcoders/me-gad-ev">source</a>
+  </header>
+
+  <div class="hero">
+    <h1>The <em>gate</em><span class="cursor" aria-hidden="true"></span></h1>
+    <p>The full season 1 homework pages are for people in the course. The way in is
+       agent-native: <em>your agent</em> calls the official MEGA.dev course MCP, reads the
+       answer to the question of the day, and gives it to this gate. No account. No
+       password. No email link. If you are wired into the course, you already hold the answer.</p>
+  </div>
+
+  <section id="ask">
+    <h2 class="mono-header">Question of the day</h2>
+    <p id="question" aria-live="polite">Loading the question…</p>
+    <form class="gate-form" id="form" autocomplete="off">
+      <label for="answer">Answer</label>
+      <input id="answer" name="answer" type="text" maxlength="500" required spellcheck="false" />
+      <button type="submit" id="go">Open the gate</button>
+    </form>
+    <p id="verdict" role="status" aria-live="polite"></p>
+    <p class="note">Matching ignores case and surrounding spaces. The answer rotates daily.
+       A correct answer sets one cookie for 24 hours; nothing else is stored.</p>
+  </section>
+
+  <section id="mechanics">
+    <h2 class="mono-header">How it works</h2>
+    <article>
+      <ol>
+        <li><b>You</b> point your agent at this page, or at <code>/gate/question</code>.</li>
+        <li><b>Your agent</b> asks <em>its own</em> official course MCP for the answer.
+            This site never calls the course and never sees course credentials.</li>
+        <li><b>The gate</b> compares the answer with today's, and on a match sets a signed,
+            HttpOnly cookie. The challenge pages then open.</li>
+      </ol>
+      <p>The <a href="../challenge/">homework index</a> with its teasers stays public.
+         Only the three full entries are behind the gate.</p>
+    </article>
+  </section>
+
+  <section id="agents">
+    <h2 class="mono-header">For agents</h2>
+    <p class="bench-intro">Do it programmatically. The cookie jar carries the pass.</p>
+<pre><code># 1. read the question
+curl -s https://megadev.div0.space/gate/question
+
+# 2. ask your official course MCP, then answer (keep the cookie jar)
+curl -s -c jar.txt -H 'Content-Type: application/json' \
+  -d '{"answer":"&lt;the answer&gt;"}' https://megadev.div0.space/gate/verify
+
+# 3. fetch a gated page
+curl -s -b jar.txt https://megadev.div0.space/challenge/s01e01/</code></pre>
+    <p class="note">Wrong answer: <code>401</code> with an honest message. Too many wrong
+       answers from one address: <code>429</code>, wait ten minutes. Details for agents:
+       <a href="../llms.txt">llms.txt</a>.</p>
+  </section>
+
+  <section id="why">
+    <p class="note">If your agent cannot get in, you have a worse agent than a veterinarian from Kielce.</p>
+  </section>
+
+  <footer>
+    <div>Maciej Gad · veterinarian · student, MEGA.dev season 1 · built with an agent fleet</div>
+    <div class="sig">𝚅𝚒𝚋𝚎𝚌𝚛𝚊𝚏𝚝𝚎𝚍. with AI Agents by Vetcoders (c)2024-2026 LibraxisAI</div>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var q = document.getElementById('question'), form = document.getElementById('form'),
+      verdict = document.getElementById('verdict'), go = document.getElementById('go');
+
+  // Only same-site gated pages are valid targets; anything else falls back to the index.
+  function target() {
+    var next = new URLSearchParams(location.search).get('next') || '';
+    var ok = /^\/challenge\/s01e0[1-3](\/[A-Za-z0-9._\-\/]*)?$/.test(next) && next.indexOf('..') < 0 && next.indexOf('//') < 0;
+    return ok ? next : '/challenge/';
+  }
+
+  function say(text, cls) {
+    verdict.textContent = '';
+    var span = document.createElement('span');
+    span.className = cls; span.textContent = text;
+    verdict.appendChild(span);
+  }
+
+  fetch('/gate/question', { cache: 'no-store' }).then(function (r) {
+    return r.json().then(function (j) { return { ok: r.ok, body: j }; });
+  }).then(function (r) {
+    q.textContent = r.ok ? r.body.question : (r.body.instruction || 'The gate has no question right now.');
+    if (!r.ok) { go.disabled = true; }
+  }).catch(function () {
+    q.textContent = 'Could not reach the gate. Try again in a minute.';
+    go.disabled = true;
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    go.disabled = true; say('checking…', 'prompt');
+    fetch('/gate/verify', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ answer: document.getElementById('answer').value })
+    }).then(function (r) {
+      return r.json().then(function (j) { return { ok: r.ok, body: j }; });
+    }).then(function (r) {
+      if (r.ok) { say('open — taking you in', 'ok'); location.assign(target()); return; }
+      say((r.body && r.body.instruction) || 'Refused.', 'fail'); go.disabled = false;
+    }).catch(function () {
+      say('Could not reach the gate. Try again in a minute.', 'fail'); go.disabled = false;
+    });
+  });
+})();
+</script>
+</body>
+</html>

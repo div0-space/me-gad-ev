@@ -155,3 +155,73 @@ the public checkout. Nothing reads course fixtures, credentials, or other reposi
 directories: the only content file opened is [`fixtures_mock.json`](app.py#L84), with
 an optional explicitly configured progress snapshot. Production auth, multi-tenancy,
 upstream fidelity, and deployment remain outside this cut.
+
+## Gate
+
+The full season 1 challenge pages (`/challenge/s01e01|s01e02|s01e03/`) are not public. A
+visitor's **agent** proves it is wired into the official course MCP by answering the
+question of the day: no accounts, no passwords, no magic links. The `/challenge/` index
+with its teasers stays public. Source: [`gate.py`](gate.py); proof:
+`exercise_gate` in [`selftest.py`](selftest.py).
+
+| Endpoint | Behavior |
+|---|---|
+| `GET /gate/question` | `{question, date, instruction, verify}`. 503 if no question is configured. |
+| `POST /gate/verify` `{"answer": "..."}` | Trim + case-insensitive compare (SHA-256 digests, constant time). Match → 200 and cookie `megadev_gate` (HttpOnly, Secure, SameSite=Lax, 24 h). Wrong → 401. Malformed → 422. Too many wrong answers from one address → 429. |
+| `GET /gate/check` | 200 with a valid cookie, 401 without, 503 if the gate is unconfigured. This is the `forward_auth` target. |
+
+The cookie is `<expiry>.<HMAC-SHA256(GATE_SECRET, "gate1:<expiry>")>`; nothing else is stored
+server-side. Rotating `GATE_SECRET` invalidates every cookie. Rotating the answer does **not**
+revoke cookies already issued; they live out their 24 h.
+
+The server holds no course credentials and never calls the course. The answer is a value
+the operator copies from the official MCP into the gate's configuration.
+
+### Configuration (environment, never in the repo)
+
+| Variable | Meaning |
+|---|---|
+| `GATE_SECRET` | Cookie signing key, at least 16 characters (`openssl rand -hex 32`). Missing or short → every gate endpoint answers 503. |
+| `GATE_EXPECTED` / `GATE_EXPECTED_FILE` | The day's answer. The file is re-read on every request. |
+| `GATE_QUESTION` / `GATE_QUESTION_FILE` | The day's question text. Same rule. |
+| `GATE_COOKIE_SECURE` | Default `1`. Set `0` only for local `http://` development. |
+| `GATE_TRUST_PROXY` | `1` behind Caddy: throttle by the first `X-Forwarded-For` address instead of the socket peer. |
+| `GATE_MAX_FAILURES` | Wrong answers per ten minutes per address before 429 (default 8). |
+
+The gate fails closed: unconfigured means 503, never a pass.
+
+### Daily rotation (operator)
+
+```sh
+printf '%s\n' '<today's answer, read from the official course MCP>' > /etc/megadev/gate-answer.txt
+printf '%s\n' '<today's question>' > /etc/megadev/gate-question.txt
+```
+
+No restart is needed. Do this as part of the daily sync.
+
+### Wire Caddy
+
+[`deploy/caddy-gate.snippet`](../deploy/caddy-gate.snippet) holds two blocks to paste into the
+`megadev.div0.space` site block: one proxies `/gate/question|verify|check` to the app, the
+other puts `forward_auth` (`/gate/check`) in front of the three gated paths and redirects
+non-2xx to `/gate/?next=<path>`. The page is [`docs/gate/index.html`](../docs/gate/index.html),
+static, served like the rest of `docs/`. The snippet was run end to end against this app
+(302 without cookie, 200 with, 502 closed when the app is down). Applying it is an operator
+action; the repo changes nothing on the VM.
+
+### Local trial
+
+```sh
+GATE_SECRET=$(openssl rand -hex 32) GATE_EXPECTED='teacup' GATE_QUESTION='Word of the day?' \
+GATE_COOKIE_SECURE=0 uv run --project server uvicorn server.app:create_app --factory --port 8000
+curl -s localhost:8000/gate/question
+curl -s -c jar -H 'Content-Type: application/json' -d '{"answer":"Teacup"}' localhost:8000/gate/verify
+```
+
+### Limits, stated plainly
+
+- The gate protects the **website**. The same pages exist in the public GitHub repo
+  (`docs/challenge/s01e0*/`, `challenges/`, `drops/`); anyone can read them there. If the
+  entries must truly be restricted, move them out of the public tree first.
+- A shared answer is a shared secret: one student can hand it to someone else. It rotates daily.
+- Throttling is in memory, per process, per address (one worker, like the rest of this server).

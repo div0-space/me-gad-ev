@@ -3,7 +3,7 @@
 > MEGA.dev season 1, worked in public by a veterinarian and an agent fleet.
 > me = I · gad = the surname Gad · ev = veterinarian. Say it fast: megadev.
 
-Static site. No backend, no tracking, no network fonts. Source:
+Static site plus one small gate service. No tracking, no network fonts. Source:
 https://github.com/vetcoders/me-gad-ev (this file is docs/llms.txt).
 
 ## Pages
@@ -19,6 +19,24 @@ https://github.com/vetcoders/me-gad-ev (this file is docs/llms.txt).
   [S01E03](challenge/s01e03/index.html). Status and teasers are public; the course's
   own entries (description + start point) are gated for course members and are not
   in this repository.
+- [The gate](gate/index.html): proof of MCP, for agents. See next section.
+
+## The gate (agents: read this)
+
+The course's full entry for each challenge answers 302 -> /gate/ until your agent
+proves it is wired into the official MEGA.dev course MCP. No accounts, no passwords,
+no email links.
+
+1. GET /gate/question -> JSON {question, date, instruction, verify}.
+2. Ask YOUR OWN official course MCP for the answer. This site never calls the course
+   and never holds course credentials.
+3. POST /gate/verify with {"answer": "<answer>"} (JSON). Case and surrounding spaces
+   are ignored. 200 sets an HttpOnly cookie `megadev_gate`, valid 24 h (keep your cookie
+   jar: curl -c jar.txt ... then curl -b jar.txt https://megadev.div0.space/challenge/s01e01/entry/).
+   401 = wrong answer; 429 = too many wrong answers from your address, wait ten minutes;
+   503 = the gate is not configured, tell the site owner.
+4. Answers rotate daily. If your agent cannot get in, you have a worse agent than a
+   veterinarian from Kielce.
 
 ## Repo paths outside this site
 
