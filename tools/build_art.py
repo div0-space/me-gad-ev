@@ -166,10 +166,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parents[1] / 'docs/assets/art')
     parser.add_argument('--refresh', action='store_true')
-    parser.add_argument('--api-base', default='http://100.82.232.70:5050')
+    parser.add_argument('--api-base', default=os.environ.get('ART_API_BASE'))
     args = parser.parse_args()
     try:
         if args.refresh:
+            if not args.api_base:
+                raise ValueError('Refresh requires ART_API_BASE or --api-base')
             refresh(args.output, args.api_base)
         else:
             validate(args.output)

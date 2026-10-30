@@ -11,6 +11,7 @@ Maciej Gad · me·gad·ev. The Journal: stories about building and working with 
 - /challenge/s01e03/ — S01E03 · The page still needs to be read — The Journal
 - /making-of/ — The workshop: built with VC — The Journal
 - /gate/ — Member sign-in — The Journal
+- /privacy/ — Privacy — The Journal
 - /journal/ — The Journal
 - /journal/feed.xml — RSS
 - /journal/before-the-service-goes-live/ — Before the service goes live

@@ -42,8 +42,9 @@ pozostają pod `/members/*`, za tym samym sprawdzeniem dostępu.
 Człowiek loguje się przez oficjalne MEGA.dev; agent może przeprowadzić go przez
 ten sam proces. Backend sprawdza dostęp świeżym OAuth, a nie deklaracją agenta.
 Konfiguracja i obsługa tokenów: [`server/README.md`](server/README.md).
-Oryginalne trzy chronione materiały `/challenge/s01e0X/entry/` pozostają
-oddzielnymi materiałami źródłowymi; wydawca nie tłumaczy ani nie nadpisuje ich.
+Trzy stare kopie dosłownych instrukcji `/challenge/s01e0X/entry/` są wycofane
+z serwowania (410), bez usuwania prywatnych plików źródłowych. Zapis na kurs
+nie daje nam zgody na redystrybucję jego instrukcji.
 
 ## Publikowanie
 
@@ -85,6 +86,19 @@ Podgląd: <http://127.0.0.1:18745/> i <http://127.0.0.1:18745/pl/>.
 Wyłączony access log chroni kody powrotu OAuth przed zapisaniem w logu żądań.
 Zmiany statycznej witryny nie wymagają restartu produkcyjnego serwera ćwiczeniowego.
 
+### Privacy and rights
+
+The independent-journal disclaimer and privacy link are shared by all EN/PL pages.
+`/privacy/` and `/pl/privacy/` name the controller, Maciej Gad (`void@div0.space`),
+and explain optional verification, transient token processing, cookies and data rights.
+Routine domain access logging is disabled in production; the backend also uses
+`--no-access-log`. Historical domain access logs were removed with owner approval.
+Infrastructure error logs are separate; do not promise that no network data can
+ever appear in diagnostics. Organizer approval and international-transfer details
+have not been verified: do not promote the gate as an approved course integration.
+See [`NOTICE`](NOTICE): this change does not relicense existing work or grant
+rights to third-party course content, marks or story material.
+
 ### Manual verification
 
 Ruff 0.14.14 uses the rules in `server/pyproject.toml`; the command checks both
@@ -112,7 +126,8 @@ SIL OFL 1.1, licencja `docs/assets/DepartureMono-LICENSE.txt`,
 python3 tools/build_art.py --output docs/assets/art
 
 # Świadome odświeżenie przez własne Art API:
-ART_API_KEY_FILE=/absolute/private/art-api-key \
+ART_API_BASE=https://your-private-art-host.example \
+  ART_API_KEY_FILE=/absolute/private/art-api-key \
   python3 tools/build_art.py --refresh --output docs/assets/art
 ```
 
@@ -129,7 +144,8 @@ tytułów, opisów ani obrazów do metadanych społecznościowych.
 python3 tools/build_og.py
 
 # Dwie nowe, uwierzytelnione operacje własnego Art API:
-ART_API_KEY_FILE=/absolute/private/art-api-key \
+ART_API_BASE=https://your-private-art-host.example \
+  ART_API_KEY_FILE=/absolute/private/art-api-key \
   python3 tools/build_og.py --refresh
 ```
 

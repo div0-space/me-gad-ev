@@ -2,9 +2,9 @@
 # PROPOSAL ONLY. Nothing in this repo applies it; the operator pastes it (see below).
 #
 # What it does
-#   /members/* detailed records and /challenge/s01e0X/entry/ course entries ask
-#   the gate app (127.0.0.1:8000, GET /gate/check) before Caddy serves files from
-#   the SEPARATE root /srv/megadev-gated, never the public docs root.
+#   /members/* own detailed records ask the gate app (127.0.0.1:8000,
+#   GET /gate/check) before files are served from /srv/megadev-gated.
+#   Verbatim course entries return 410; private originals are not deleted.
 #   A valid `megadev_gate` cookie => 200 => the entry is served. Anything else =>
 #   redirect to /gate/?next=<path>. Teaser pages /challenge/s01e0X/, the index
 #   /challenge/ and all other static files are untouched and public.
@@ -16,14 +16,16 @@
 #        GATE_OAUTH_REDIRECT_URI=https://megadev.div0.space/gate/callback
 #      Register the production callback separately; the local preview client is not deployable here.
 #      Behind HTTPS leave GATE_COOKIE_SECURE at its default (on).
-#   2. Paste the two blocks below INSIDE the `megadev.div0.space { ... }` site block, next to
+#   2. Integrate the blocks below INSIDE the `megadev.div0.space { ... }` site block,
 #      the existing static `root`/`file_server` and the Bearer-gated `/mcp*` and `/api/*`.
 #      The /gate/* endpoints must NOT sit behind the Bearer gate: visitors have no token.
 #      Adjust `root` in block 2 if the landing root differs from /srv/megadev-landing.
-#      Disable callback query logging or redact code/state before enabling this route.
+#      Replace this domain's access-log output with `discard`; do not alter other domains.
+#      Keep the backend's --no-access-log. Remove historical domain access logs only
+#      with the owner's approval. Infrastructure error logs are a separate concern.
 #   3. `caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy`
 #   4. Check:
-#        curl -si https://megadev.div0.space/challenge/s01e01/entry/ | head -3 # 302 -> /gate/?next=...
+#        curl -si https://megadev.div0.space/challenge/s01e01/entry/ # 410, even with a cookie
 #        curl -s  https://megadev.div0.space/gate/handshake                  # OAuth instructions
 #        curl -si https://megadev.div0.space/challenge/                       # 200, still public
 #
@@ -59,17 +61,27 @@ handle /api/* {
 	reverse_proxy 127.0.0.1:8000
 }
 
+# Replace the domain's existing log block, not an additional logger.
+log {
+	output discard
+}
+
+# Do not redistribute the old verbatim instructions, even to enrolled visitors.
+@retired_course_entry path /challenge/s01e01/entry /challenge/s01e01/entry/* /challenge/s01e02/entry /challenge/s01e02/entry/* /challenge/s01e03/entry /challenge/s01e03/entry/*
+handle @retired_course_entry {
+	header Cache-Control no-store
+	header X-Robots-Tag "noindex, nofollow"
+	respond "This verbatim course entry is no longer distributed. Read our own account in the member journal or visit the official course." 410
+}
+
 # Block 1 — the gate's own endpoints, public, proxied to the app.
 @gate_api path /gate/handshake /gate/login /gate/callback /gate/check
 handle @gate_api {
 	reverse_proxy 127.0.0.1:8000
 }
 
-# Block 2 — the three gated pages. Note `redir *`: without the `*`, Caddy reads the target as a
-# path matcher and the redirect silently never fires (tested; the page then fails OPEN).
-# This block was run end to end against the gate app: 302 without cookie, 200 with, 502 if the
-# gate is down (closed). Revalidate the OAuth callback and /members addition before deployment.
-@gated path /members /members/* /challenge/s01e01/entry /challenge/s01e01/entry/* /challenge/s01e02/entry /challenge/s01e02/entry/* /challenge/s01e03/entry /challenge/s01e03/entry/*
+# Member records fail closed; never move this root into the public tree.
+@gated path /members /members/*
 handle @gated {
 	forward_auth 127.0.0.1:8000 {
 		uri /gate/check
@@ -80,5 +92,13 @@ handle @gated {
 		}
 	}
 	root * /srv/megadev-gated
+	file_server
+}
+
+# Replace the existing public fallback. Mutable documents must not retain the old language.
+handle {
+	@public_document not path /assets/*
+	header @public_document Cache-Control no-store
+	root * /srv/megadev-landing
 	file_server
 }

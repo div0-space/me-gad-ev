@@ -150,10 +150,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'docs/assets/art')
     parser.add_argument('--refresh', action='store_true')
-    parser.add_argument('--api-base', default='http://100.82.232.70:5050')
+    parser.add_argument('--api-base', default=os.environ.get('ART_API_BASE'))
     parser.add_argument('--chromium')
     args = parser.parse_args()
     try:
+        if args.refresh and not args.api_base:
+            raise ValueError('Refresh requires ART_API_BASE or --api-base')
         build(args.output, args.api_base, args.refresh, args.chromium)
     except (OSError, ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as error:
         parser.exit(2, 'journal-og: ' + str(error) + '\n')

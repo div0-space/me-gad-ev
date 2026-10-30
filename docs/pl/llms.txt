@@ -11,6 +11,7 @@ Maciej Gad · me·gad·ev. The Journal: opowieści o budowaniu i pracy z agentam
 - /pl/challenge/s01e03/ — S01E03 · Stronę trzeba jeszcze przeczytać — The Journal
 - /pl/making-of/ — Warsztat: zbudowane z VC — The Journal
 - /pl/gate/ — Logowanie uczestnika — The Journal
+- /pl/privacy/ — Prywatność — The Journal
 - /pl/journal/ — The Journal
 - /pl/journal/feed.xml — RSS
 - /pl/journal/before-the-service-goes-live/ — Zanim usługa wyjdzie na zewnątrz

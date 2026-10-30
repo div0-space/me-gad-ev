@@ -198,15 +198,16 @@ and public summaries tell a self-contained story without course internals.
 English is canonical at unprefixed public routes; Polish public pages use `/pl/`.
 `/members/journal/` holds the English detailed record and `/members/pl/journal/`
 its Polish counterpart. Both remain under the protected `/members/*` tree, never
-`/pl/members/*`. Full course entries retain their language-independent routes
-`/challenge/s01e0[1-3]/entry/`. Both private trees stay outside this repository.
+`/pl/members/*`. The old verbatim course entries at
+`/challenge/s01e0[1-3]/entry/` return 410, even with a valid member cookie.
+Their private files are retained outside the public repository, not redistributed.
 Gate pages are `/gate/` and `/pl/gate/`, but all OAuth/API endpoints remain
 unprefixed `/gate/*`. The unchanged production OAuth allowlist returns member logins
 to `/members/journal/`. Shared scripts keep a validated, same-origin member language
 and story intent in session storage, then clear it on one authenticated resume.
 No backend restart or Caddy routing change is needed. Without JavaScript or session
 storage, Polish login can land at the English member archive; its language switch
-still opens the Polish archive. Original protected course return routes are unchanged.
+still opens the Polish archive. Old course-entry return URLs no longer serve instructions.
 The gate uses fresh OAuth PKCE, not an operator-configured answer.
 Visitors can ask their agent to read `/gate/handshake`, explain the permission,
 and drive the returned login URL in the browser they want to use. The human
@@ -219,6 +220,14 @@ and discards them. Revocation is best-effort if the course is unavailable; the s
 never persists the tokens and never reads the visitor's existing harness credentials.
 This briefly gives the backend access to a new course token; it is **not**
 a course-signed attestation. Course terms and redistribution permissions still apply.
+
+The shared gate page links `/privacy/` or `/pl/privacy/` before the sign-in action.
+The controller is Maciej Gad (`void@div0.space`). Routine Caddy access logging
+for this domain is disabled (`output discard`); the backend uses `--no-access-log`.
+The owner approved removal of this domain's historical access logs. Do not apply
+that removal or logging change to other hosted domains or infrastructure error logs.
+Organizer approval has not been obtained; do not represent the gate as an approved
+integration or assume course enrollment confers redistribution permission.
 
 | Endpoint | Contract |
 |---|---|

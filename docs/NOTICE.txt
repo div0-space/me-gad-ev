@@ -1,0 +1,23 @@
+The Journal / me·gad·ev
+
+This is an independent participant journal. It is not affiliated with,
+endorsed by, or an official publication of MEGA.dev or BRAVE Education.
+Organizer approval of the journal's optional access gate is not claimed.
+
+The repository's MIT license grants only rights that its contributors can
+grant. It does not grant rights to third-party course materials, recordings,
+messages, assignments, answers, characters or other third-party content.
+MEGA.dev, BRAVE Education, Rook and other third-party names remain associated
+with their respective owners. Mentioning technical tool names or interfaces
+for interoperability does not claim ownership, exclusive rights, or that
+those names and interfaces are necessarily copyrightable.
+
+Course enrollment and an access gate do not confer redistribution permission.
+Full verbatim course entries are not distributed by this publication. Any
+future third-party quotation requires its own lawful basis and attribution;
+this notice is not a blanket quotation permission or a legal determination.
+
+Locally hosted fonts retain their separate SIL Open Font License notices
+alongside the font files. Existing author credits and the repository LICENSE
+remain unchanged. This notice does not relicense existing text, revoke earlier
+license grants, or transfer authorship to the agent-team signature.

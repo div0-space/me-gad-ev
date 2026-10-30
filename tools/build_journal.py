@@ -28,6 +28,7 @@ PAGE_PATHS = {
     'home': '/', 'episodes': '/challenge/',
     's01e01': '/challenge/s01e01/', 's01e02': '/challenge/s01e02/',
     's01e03': '/challenge/s01e03/', 'making-of': '/making-of/', 'gate': '/gate/',
+    'privacy': '/privacy/',
 }
 GATE_IDS = {'agent-prompt', 'copy-prompt', 'copy-status', 'verdict', 'go',
             'retry', 'gate-actions', 'permission', 'public-teasers'}
@@ -51,6 +52,8 @@ UI = {
         'methodology': 'Metoda pracy i stan dowodów', 'two_paths': 'Dwie ścieżki czytania',
         'public_path': 'Publiczne historie można czytać bez logowania.',
         'member_path': 'Zapisy dla uczestników są dostępne po zalogowaniu.',
+        'privacy': 'Prywatność',
+        'independent': 'Niezależny dziennik uczestnika. Bez afiliacji z MEGA.dev / BRAVE Education.',
     },
     'en': {
         'episodes': 'Episodes', 'ledger': 'Ledger', 'making': 'Built with VC',
@@ -71,6 +74,8 @@ UI = {
         'methodology': 'Working method and evidence status', 'two_paths': 'Two reading paths',
         'public_path': 'Public stories can be read without signing in.',
         'member_path': 'Member records are available after signing in.',
+        'privacy': 'Privacy',
+        'independent': 'Independent participant journal. Not affiliated with MEGA.dev / BRAVE Education.',
     },
 }
 
@@ -151,7 +156,7 @@ def load_site(path):
     if (not isinstance(data, dict) or set(data) != {'schema', 'pages'}
             or data.get('schema') != SITE_SCHEMA or not isinstance(data.get('pages'), dict)
             or set(data['pages']) != set(PAGE_PATHS)):
-        raise ValueError('expected site v1 with all seven fixed pages')
+        raise ValueError('expected site v1 with all required fixed pages')
     for page_id, page in data['pages'].items():
         if not isinstance(page, dict) or set(page) != {'translations'}:
             raise ValueError('invalid site page fields')
@@ -227,6 +232,11 @@ def shell(title, content, member=False, *, path='/journal/', description=None, l
     gate_assets = ''
     if path == '/gate/':
         gate_assets = f'<meta name="robots" content="noindex"><link rel="stylesheet" href="{asset_url("gate.css")}"><script src="{asset_url("gate.js")}" defer></script>'
+        privacy = ('Przed logowaniem przeczytaj informację o administratorze, tokenach i cookies.'
+                   if language == 'pl' else
+                   'Before signing in, read how the controller handles tokens and cookies.')
+        content = (f'<p class="note">{privacy} <a href="{local_path("/privacy/", language)}">'
+                   f'{ui["privacy"]}</a>. {ui["independent"]}</p>' + content)
     return f'''<!doctype html>
 <html lang="{language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(page_title)}</title>{head_metadata}
@@ -240,6 +250,7 @@ def shell(title, content, member=False, *, path='/journal/', description=None, l
 <nav class="site-nav" id="primary-nav" aria-label="{ui['primary']}">{links}</nav></header>
 <div class="page-shell"><main id="main">{content}</main>
 <footer class="site-footer"><p>{ui['author']}</p><p><a href="{local_path('/making-of/', language)}">{ui['making']} / Vibecrafted</a> · <a href="{local_path('/journal/feed.xml', language)}">{ui['rss']}</a></p>
+<p>{ui['independent']} · <a href="{local_path('/privacy/', language)}">{ui['privacy']}</a> · <a href="/NOTICE.txt">NOTICE</a></p>
 <p>𝚅𝚒𝚋𝚎𝚌𝚛𝚊𝚏𝚝𝚎𝚍. with AI Agents by Vetcoders (c)2024-2026 LibraxisAI</p></footer></div></body></html>
 '''
 
