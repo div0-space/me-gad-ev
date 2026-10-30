@@ -1,0 +1,30 @@
+# The Journal
+
+Maciej Gad · me·gad·ev. The Journal: opowieści o budowaniu i pracy z agentami.
+
+## Czytanie
+
+- /pl/ — The Journal
+- /pl/challenge/ — Odcinki — The Journal
+- /pl/challenge/s01e01/ — S01E01 · Redakcja zaczyna się od porównania — The Journal
+- /pl/challenge/s01e02/ — S01E02 · Notatka dla kogoś, kto nie był przy rozmowie — The Journal
+- /pl/challenge/s01e03/ — S01E03 · Stronę trzeba jeszcze przeczytać — The Journal
+- /pl/making-of/ — Warsztat: zbudowane z VC — The Journal
+- /pl/gate/ — Logowanie uczestnika — The Journal
+- /pl/privacy/ — Prywatność — The Journal
+- /pl/journal/ — The Journal
+- /pl/journal/feed.xml — RSS
+- /pl/journal/before-the-service-goes-live/ — Zanim usługa wyjdzie na zewnątrz
+- /pl/journal/a-handoff-is-more-than-a-plan/ — Przekazanie pracy to więcej niż plan
+- /pl/journal/the-artifact-is-not-the-acceptance/ — Stronę trzeba jeszcze przeczytać
+- /pl/journal/evidence-another-reader-can-use/ — Notatka dla kogoś, kto nie był przy rozmowie
+- /pl/journal/judgment-before-speed/ — Redakcja zaczyna się od porównania
+
+## Dostęp do kursu
+
+Publiczne strony nie wymagają logowania. Zapisy uczestników są przechowywane poza publicznym katalogiem.
+Logowanie: otwórz stronę bramy w tej samej przeglądarce. GET /gate/handshake zwraca dane połączenia.
+Użytkownik loguje się i zatwierdza świeże połączenie OAuth w https://hq.mega.dev. Używaj wyłącznie zwróconego adresu /gate/login na tym samym origin.
+Backend sprawdza uczestnictwo przez oficjalny MCP, próbuje unieważnić świeże tokeny, usuwa je i ustawia własne ciasteczko HttpOnly.
+Nie kopiuj istniejących danych logowania, tokenów ani kodów do rozmowy. GET /gate/check zwraca 200 dla ważnego ciasteczka, w innym przypadku 401.
+Błędy nie przyznają dostępu. Statyczna kopia nie zawiera usługi bramy ani prywatnych zapisów.

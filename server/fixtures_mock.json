@@ -1,0 +1,12 @@
+{
+  "season": "MOCK-Paper Moon Workshop",
+  "rook": "MOCK-A cardboard rook rolls a square marble into the workshop.",
+  "lessons": [
+    {"id": "MOCK-L01", "title": "MOCK-The clockwork teacup", "body": "MOCK-Invent a greeting for a teacup that ticks backwards.", "challenge": "00000000-0000-4000-8000-000000000001"},
+    {"id": "MOCK-L02", "title": "MOCK-The origami lighthouse", "body": "MOCK-Describe a paper beacon for imaginary moths.", "challenge": "00000000-0000-4000-8000-000000000002"}
+  ],
+  "challenges": [
+    {"uuid": "00000000-0000-4000-8000-000000000001", "lesson_id": "MOCK-L01", "code": "MOCK-C01", "title": "MOCK-Teacup greeting", "description": "MOCK-Compose one invented greeting for a mechanical cup.", "startPoint": "MOCK-An empty saucer on a paper moon."},
+    {"uuid": "00000000-0000-4000-8000-000000000002", "lesson_id": "MOCK-L02", "code": "MOCK-C02", "title": "MOCK-Moth beacon", "description": "MOCK-Compose one invented signal for paper moths.", "startPoint": "MOCK-A folded tower in a pretend harbor."}
+  ]
+}

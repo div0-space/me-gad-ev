@@ -1,0 +1,115 @@
+{
+  "schema": "me-gad-ev.journal.v2",
+  "posts": [
+    {
+      "id": "s01e05",
+      "slug": "before-the-service-goes-live",
+      "published": "2026-10-30",
+      "updated": "2026-10-30",
+      "sequence": 5,
+      "audience": "public",
+      "author": "Maciej + agents",
+      "episode": "S01E05",
+      "translations": {
+        "pl": {
+          "title": "Zanim usługa wyjdzie na zewnątrz",
+          "excerpt": "Dziś zaczynamy kolejny etap: od kodu, który da się przekazać, do usługi, za którą trzeba odpowiadać. Na razie zapisujemy zamiar i granice zgody, nie rezultat wdrożenia.",
+          "body_html": "<p>Wczoraj pracowaliśmy nad przekazaniem projektu między agentami. Dziś otwieramy kolejny etap: chcemy, żeby współpraca trwała także wtedy, gdy Maciej odchodzi od klawiatury. S01E05 jest rozpoczęte, a ten wpis zapisuje nasz punkt wyjścia.</p>\n<h2>Od raportu do rozmowy</h2>\n<p>Raport końcowy dobrze zamyka sesję, ale projekt żyje dalej. Pojawiają się pytania o stan prac, nowe obserwacje i błędy. Interesuje nas droga powrotna: jak doprowadzić pytanie do właściwego kontekstu i odpowiedzieć tam, gdzie ktoś na tę odpowiedź czeka.</p>\n<p>To naturalne rozwinięcie wczorajszej pracy. Wtedy składaliśmy osobne fragmenty w jeden rezultat. Teraz chcemy sprawdzić ciągłość: czy po przekazaniu projektu kolejna rozmowa nadal ma związek z kodem i z tym, co faktycznie działa.</p>\n<h2>Rozmowa, która prowadzi do zmiany</h2>\n<p>Wyjaśnienie zachowania i jego sprawdzenie to dwa różne rodzaje pracy. Chcemy połączyć je w jeden obieg: konkretna uwaga powinna pomóc ustalić następny ruch w projekcie, a wynik zmiany powinien wrócić do rozmowy. Dla nas to praktyczne pytanie o użyteczność agentów po pierwszym uruchomieniu, nie tylko o szybkość napisania kodu.</p>\n<p>Przed nami wybór środowiska, przygotowanie dostępu i zgoda Macieja na uruchomienie usługi. Nowa usługa nie została jeszcze wdrożona; kolejny zapis będzie dotyczył rzeczywistego przebiegu tej pracy. Na dziś otwieramy temat i publikujemy go obok wczorajszej historii.</p>\n<p><a href=\"/pl/journal/a-handoff-is-more-than-a-plan/\">Poprzedni wpis: przekazanie pracy to więcej niż plan →</a></p>"
+        },
+        "en": {
+          "title": "Before the service goes live",
+          "excerpt": "Today we begin the next step: from code that can be handed over to a service someone must own. For now, this is a record of intent and permission, not a deployment result.",
+          "body_html": "<p>Yesterday we worked on handing a project between agents. Today we begin the next stage: keeping the collaboration going when Maciej steps away from the keyboard. S01E05 has started, and this article records our starting point.</p>\n<h2>From a report to a conversation</h2>\n<p>A final report can close a session neatly, but the project continues. People ask where the work stands, bring new observations and report bugs. We are interested in the return path: getting a question into the right context and answering where someone is waiting for that answer.</p>\n<p>It follows naturally from yesterday’s work. Then, we assembled separate pieces into one result. Now we want to examine continuity: whether the next conversation after a handoff still connects to the code and to what actually works.</p>\n<h2>A conversation that leads to a change</h2>\n<p>Explaining behaviour and checking it are different kinds of work. We want to connect them in a single loop: a concrete observation should help determine the next change, and its result should return to the conversation. For us, this is a practical question about agents’ usefulness after the first launch, not just how quickly they can write code.</p>\n<p>We still need to choose an environment, prepare access and obtain Maciej’s approval to launch the service. The new service has not been deployed yet; the next record will cover the work as it happens. Today we open the subject and publish it beside yesterday’s account.</p>\n<p><a href=\"/journal/a-handoff-is-more-than-a-plan/\">Previous: a handoff is more than a plan →</a></p>"
+        }
+      }
+    },
+    {
+      "id": "s01e04",
+      "slug": "a-handoff-is-more-than-a-plan",
+      "published": "2026-10-30",
+      "updated": "2026-10-30",
+      "sequence": 4,
+      "audience": "public",
+      "author": "Maciej + agents",
+      "episode": "S01E04",
+      "translations": {
+        "pl": {
+          "title": "Przekazanie pracy to więcej niż plan",
+          "excerpt": "Wczorajsza praca nad małym serwisem pokazała różnicę między podziałem zadań a ich złożeniem. Osobne części miały sens dopiero wtedy, gdy strona i dane mówiły to samo.",
+          "body_html": "<p>29 października pracowaliśmy z agentami nad małym serwisem, który zbiera zapis wykonanych prac w czytelne podsumowanie. Nie zaczynaliśmy od pustego katalogu. Były już kod, decyzje architektoniczne i opis dalszego kierunku. Trzeba było ustalić, co z tego jest wiążącą podstawą, a co dopiero zamiarem. Ten tekst publikujemy dzień później, kiedy można oddzielić przebieg pracy od jej zapowiedzi.</p>\n<h2>Wspólna podstawa przed podziałem</h2>\n<p>Serwis miał dwóch odbiorców: człowieka czytającego stronę i agenta pobierającego dane. To nie były dwa niezależne produkty. Obaj mieli dostać ten sam obraz pracy, choć w innej postaci. Rozdzielenie wykonania nie mogło oznaczać osobnego ustalania, co właściwie się wydarzyło.</p>\n<p>W takim układzie najważniejszy staje się wspólny kontrakt danych. Jeśli jedna część pokazuje ostatni stan zadania, inna nie powinna samodzielnie odtwarzać całej jego historii. Nawet proste słowo „błąd” wymaga decyzji: czy oznacza błąd końcowy, czy również wcześniejsze niepowodzenie przed udanym zakończeniem? Dobrze napisana tabela nie rozstrzyga tej różnicy za nas.</p>\n<h2>Równolegle nie znaczy niezależnie</h2>\n<p>Zachowane zapisy wykonawców pokazują konkretny moment tarcia. Część testów powstała, zanim wszystkie potrzebne elementy były dostępne w głównej wersji kodu. Brakująca odpowiedź serwisu nie była jeszcze dowodem, że test jest zły. Nie była też powodem, żeby ogłosić całość gotową. Trzeba było nazwać zależność i wrócić do niej po integracji.</p>\n<p>To zmienia sposób czytania raportu agenta. „Gotowe na mojej gałęzi” opisuje dostarczony fragment. „Działa po złożeniu” jest innym stwierdzeniem i potrzebuje własnej podstawy. W tej pracy zachowaliśmy oba etapy zamiast wygładzać historię do jednego bezproblemowego przebiegu.</p>\n<p>W kodzie, do którego wracamy przy pisaniu, oba sposoby odczytu korzystają z jednego czytnika. Testy porównują także kolejność danych między stroną a odpowiedzią dla programu. To ważniejszy szczegół niż samo istnienie dwóch działających adresów: czytelnik i agent nie powinni dostawać sprzecznych wersji tej samej nocy.</p>\n<h2>Co zostaje następnej osobie</h2>\n<p>Maciej wyznacza kierunek i decyduje, co może zostać opublikowane. Agenci przygotowują kod, wskazują zależności i zostawiają zapis swoich sprawdzeń. Przekazanie pracy jest udane nie wtedy, gdy następna osoba otrzyma długi opis, lecz wtedy, gdy potrafi ustalić, na czym stoi i za co odpowiada.</p>\n<p>Z wczorajszej pracy zostaje więc coś bardziej użytecznego niż recepta na uruchomienie wielu agentów: rozróżnienie planu, dostawy i zintegrowanego rezultatu. Przy kolejnym zadaniu chcemy zachować tę samą ostrożność. Następny wpis opisuje właśnie taki początek — zanim pojawi się wynik, który można uczciwie pokazać.</p>\n<p><a href=\"/pl/journal/before-the-service-goes-live/\">Następny wpis: zanim usługa wyjdzie na zewnątrz →</a></p>"
+        },
+        "en": {
+          "title": "A handoff is more than a plan",
+          "excerpt": "Yesterday’s work on a small service exposed the gap between dividing the tasks and assembling the result. Separate pieces only made sense when the page and the data told the same story.",
+          "body_html": "<p>On 29 October we worked with agents on a small service that turns a record of completed work into a readable summary. We did not start with an empty directory. Code, architectural decisions and a proposed direction already existed. We needed to establish which parts formed a binding baseline and which were still intentions. We are publishing this account a day later, with room to distinguish the work from its announcement.</p>\n<h2>A shared foundation before the split</h2>\n<p>The service had two readers: a person opening a page and an agent fetching data. These were not two independent products. Both needed the same account of the work, presented differently. Splitting the implementation could not mean separately deciding what had happened.</p>\n<p>That makes the shared data contract central. If one part exposes a job’s latest state, another should not independently reconstruct its entire history. Even a simple word such as “failure” needs a decision: does it mean a final failure, or also an earlier failure followed by a successful finish? A well-designed table cannot settle that distinction for us.</p>\n<h2>Parallel does not mean independent</h2>\n<p>The retained worker records show a specific point of friction. Some tests were written before every required component was available in the main code baseline. A missing service response did not yet prove that the test was wrong. Nor was it a reason to call the whole thing finished. The dependency had to be named and revisited after integration.</p>\n<p>This changes how we read an agent’s report. “Ready on my branch” describes a delivered piece. “Works when assembled” is a different statement, requiring its own evidence. We have kept both stages in the account rather than smoothing the history into one trouble-free run.</p>\n<p>In the code we returned to while writing, both ways of reading the result use one reader. The tests also compare the order of data between the page and the machine-readable response. That matters more than the mere existence of two working addresses: a reader and an agent should not receive conflicting accounts of the same night.</p>\n<h2>What the next person receives</h2>\n<p>Maciej sets the direction and decides what may be published. Agents prepare code, identify dependencies and retain records of their checks. A useful handoff is not measured by the length of its description. It lets the next person establish where they stand and what they own.</p>\n<p>Yesterday’s work leaves us with something more useful than a recipe for launching many agents: a distinction between a plan, a delivery and an integrated result. We want to preserve that care in the next task. The next article describes exactly that kind of beginning — before there is a result we can honestly show.</p>\n<p><a href=\"/journal/before-the-service-goes-live/\">Next: before the service goes live →</a></p>"
+        }
+      }
+    },
+    {
+      "id": "s01e03",
+      "slug": "the-artifact-is-not-the-acceptance",
+      "published": "2026-10-29",
+      "updated": "2026-10-29",
+      "sequence": 3,
+      "audience": "public",
+      "author": "Maciej + agents",
+      "episode": "S01E03",
+      "translations": {
+        "pl": {
+          "title": "Stronę trzeba jeszcze przeczytać",
+          "excerpt": "Pliki źródłowe to nie całe wydanie. Przy pracy z agentami Maciej wracał do podglądu: do nawigacji, stylów i tego, czy dokument można przeczytać bez pomocy autora.",
+          "body_html": "<p>Przegląd kodu i czytanie gotowej strony to dwie różne czynności. W kodzie widać strukturę. W przeglądarce widać, czy tytuł daje się przeczytać, dokąd prowadzi powrót i czy szeroki element nie rozpycha całego dokumentu.</p>\n<p>W pracy nad publikacją Maciej oglądał lokalny podgląd, a jego uwagi prowadziły do zmian w nawigacji i sposobie dołączania stylów. To konkretne poprawki dla czytelnika: łatwiej wrócić do miejsca, z którego się przyszło, a wyeksportowany dokument nie powinien zależeć od przypadkowego otoczenia.</p>\n<p>Ten dziennik też jest częścią pracy. Jego wcześniejsza implementacja została podzielona między czterech wykonawców i integratora. Osobne części — teksty, oprawa graficzna, wspólny układ i opis procesu — musiały spotkać się w jednym wydaniu. Dopiero wtedy można było ocenić, jak razem działają.</p>\n<p>Obecna korekta wraca do osobistego szyldu me·gad·ev, nagłówków w Monaspace Xenon oraz pełnych wersji polskiej i angielskiej. The Journal pozostaje tytułem publikacji. Chodzi o stronę, na której da się zostać przy tekście, zamiast za każdym razem od nowa rozszyfrowywać interfejs.</p>\n<p><a href=\"/pl/making-of/\">Jak powstaje ten serwis</a> · <a href=\"/pl/challenge/s01e03/\">Odcinek S01E03</a> · <a href=\"/members/pl/journal/s01e03/\">Szczegółowy zapis dla uczestników</a></p>"
+        },
+        "en": {
+          "title": "The page still needs to be read",
+          "excerpt": "Source files are not the whole publication. Working with agents, Maciej returned to the preview: navigation, styles and whether someone could read the document without its author beside them.",
+          "body_html": "<p>Reviewing code and reading a finished page are different activities. Code reveals structure. The browser reveals whether a heading is readable, where the return link leads and whether a wide element pushes the whole document off screen.</p>\n<p>During publication work, Maciej reviewed the local preview. His feedback led to changes in return navigation and the way styles were included. These are practical improvements for a reader: getting back to where they came from, and opening an exported document without depending on its original surroundings.</p>\n<p>This journal is part of that work too. Its earlier implementation was divided between four workers and an integrator. Separate pieces — writing, artwork, the shared reading shell and the process account — had to meet in one publication before anyone could judge how they worked together.</p>\n<p>The current correction restores the personal me·gad·ev wordmark, headings in Monaspace Xenon, and complete Polish and English editions. The Journal remains the publication title. The aim is a site where a reader can stay with the writing rather than decipher the interface again on every page.</p>\n<p><a href=\"/making-of/\">How this site is built</a> · <a href=\"/challenge/s01e03/\">Episode S01E03</a> · <a href=\"/members/journal/s01e03/\">Detailed member record</a></p>"
+        }
+      }
+    },
+    {
+      "id": "s01e02",
+      "slug": "evidence-another-reader-can-use",
+      "published": "2026-10-29",
+      "updated": "2026-10-29",
+      "sequence": 2,
+      "audience": "public",
+      "author": "Maciej + agents",
+      "episode": "S01E02",
+      "translations": {
+        "pl": {
+          "title": "Notatka dla kogoś, kto nie był przy rozmowie",
+          "excerpt": "Artykuł musi dać się czytać bez znajomości poprzedniej sesji. Źródła, daty i jasno nazwane decyzje pomagają przekazać pracę dalej — także następnemu agentowi.",
+          "body_html": "<p>Rozmowa z agentem gromadzi kontekst niemal niezauważalnie. Wiemy już, do czego odnosi się „ten plik” i dlaczego odrzuciliśmy wcześniejszą wersję. Kiedy pracę przejmuje ktoś nowy, te skróty przestają działać. Zostaje notatka, która miała wszystko wyjaśnić.</p>\n<p>Przygotowując zapisy do tego dziennika, Maciej i agenci musieli zamienić przebieg pracy w tekst dla następnego czytelnika. Sama kolejność wiadomości nie wystarczała. Trzeba było wskazać, co czytaliśmy, co z tego wykorzystaliśmy i w którym miejscu zapadła decyzja.</p>\n<p>Dobry odsyłacz prowadzi do konkretnego materiału, nie do folderu, w którym ktoś być może go znajdzie. Data mówi, którego stanu dotyczy opis. Oddzielenie obserwacji od interpretacji pozwala wrócić do spornego zdania bez odtwarzania całej rozmowy.</p>\n<p>Dlatego dziennik ma stałe adresy artykułów i kolejność publikacji niezależną od późniejszych poprawek. Można odesłać do jednego zapisu, poprawić go bez udawania nowej publikacji i czytać historię od najnowszego wpisu. To niewielkie decyzje wydawnicze, ale ułatwiają dalszą pracę.</p>\n<p><a href=\"/pl/challenge/s01e02/\">Odcinek S01E02</a> · <a href=\"/members/pl/journal/s01e02/\">Szczegółowy zapis dla uczestników</a></p>"
+        },
+        "en": {
+          "title": "A note for someone who missed the conversation",
+          "excerpt": "An article has to work without the previous session. Sources, dates and clearly named decisions help hand work to another reader — including the next agent.",
+          "body_html": "<p>A conversation with an agent accumulates context almost unnoticed. We know what “that file” means and why an earlier version was rejected. When someone new takes over, those shortcuts stop working. All they have is the note that was meant to explain it.</p>\n<p>Preparing records for this journal meant turning the course of the work into something the next reader could use. Maciej and the agents could not simply preserve the order of messages. We needed to name what we read, what we used and where a decision was made.</p>\n<p>A useful reference leads to a specific item, not a folder where someone might find it. A date identifies the state being described. Separating an observation from an interpretation lets a reader revisit a disputed sentence without rebuilding the whole conversation.</p>\n<p>That is why the journal has stable article addresses and a publication order that does not change with later edits. We can link to one record, correct it without presenting it as a new publication, and read the story newest first. These are small publishing decisions that make subsequent work easier.</p>\n<p><a href=\"/challenge/s01e02/\">Episode S01E02</a> · <a href=\"/members/journal/s01e02/\">Detailed member record</a></p>"
+        }
+      }
+    },
+    {
+      "id": "s01e01",
+      "slug": "judgment-before-speed",
+      "published": "2026-10-29",
+      "updated": "2026-10-29",
+      "sequence": 1,
+      "audience": "public",
+      "author": "Maciej + agents",
+      "episode": "S01E01",
+      "translations": {
+        "pl": {
+          "title": "Redakcja zaczyna się od porównania",
+          "excerpt": "Pracując z agentem nad tekstem, Maciej wybierał, co można skrócić. Agent porównywał wersje. Ten podział pracy okazał się ważniejszy niż gładkie brzmienie gotowego akapitu.",
+          "body_html": "<p>Kiedy agent oddaje krótszy, płynniejszy tekst, łatwo przeczytać już tylko nową wersję. W naszej pracy nad redakcją wracaliśmy do obu. Nowe zdanie mogło brzmieć lepiej, a jednocześnie pomijać zastrzeżenie, od którego zależał sens poprzedniego.</p>\n<p>Maciej podejmował decyzje o tym, co usunąć. Agent zestawiał materiał z propozycją i pokazywał konkretne różnice. Zamiast ogólnej prośby o akceptację dawało to rozmowę o fragmencie: czy ta informacja jest zbędna, czy tylko przeszkadza w skracaniu?</p>\n<p>Taki przegląd ma dwa tempa. Najpierw trzeba przeczytać całość, żeby wiedzieć, czemu służy. Potem można przyglądać się zmianom z bliska. Sam licznik znaków pomaga opisać rozmiar edycji; nie odpowie za nas, czy tekst nadal mówi to samo.</p>\n<p>W The Journal stosujemy ten sam sposób pracy. Tytuł i zajawka mają zaprosić do czytania, ale nie mogą obiecywać więcej niż artykuł. Korekta powinna poprawiać opowieść, a nie po cichu dopisywać jej lepszy wynik.</p>\n<p><a href=\"/pl/challenge/s01e01/\">Odcinek S01E01</a> · <a href=\"/members/pl/journal/s01e01/\">Szczegółowy zapis dla uczestników</a></p>"
+        },
+        "en": {
+          "title": "Editing starts with a comparison",
+          "excerpt": "Working on a text with an agent, Maciej chose what could be cut. The agent compared versions. That division of work mattered more than how smoothly the final paragraph read.",
+          "body_html": "<p>When an agent returns a shorter, smoother text, it is tempting to read only the new version. In our editing work, we returned to both. A sentence could sound better while dropping the qualification that gave the original its meaning.</p>\n<p>Maciej decided what to remove. The agent placed the proposed edit beside the source and showed the actual differences. Instead of a general request for approval, this made the conversation specific: is this information unnecessary, or is it simply inconvenient to shorten?</p>\n<p>That review has two speeds. First, read the whole piece to understand its purpose. Then inspect individual changes. A character count describes the size of an edit; it cannot decide whether the text still says the same thing.</p>\n<p>We use the same approach in The Journal. A headline and excerpt should invite someone to read, without promising more than the article delivers. An edit should improve the account, not quietly give it a better outcome.</p>\n<p><a href=\"/challenge/s01e01/\">Episode S01E01</a> · <a href=\"/members/journal/s01e01/\">Detailed member record</a></p>"
+        }
+      }
+    }
+  ]
+}

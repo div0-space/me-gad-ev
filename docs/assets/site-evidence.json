@@ -1,0 +1,61 @@
+{
+  "schema": "me-gad-ev.site-evidence.v1",
+  "as_of": "2026-10-29",
+  "scope": "Historical website observations and independently exercised main-checkout PL/EN correction. Each record names its own verification scope; these counts are not benchmark scores or a live uptime dashboard.",
+  "provenance_boundaries": {
+    "public_sources": "Source references point to curated public summaries, not raw private receipts. Historical snapshot counts were supplied in the redesign brief; they are attributed records, not independently rerun measurements of the redesigned site.",
+    "excluded": ["raw sessions", "internal receipt identifiers", "private paths", "credentials", "tokens", "course diagnoses", "course solution links", "member chart data"],
+    "acceptance": "All five declared cut verifiers, including assembly, passed under the supervisor. The operator independently exercised the assembled local HTTP and browser surfaces. Owner approval and deployment of this redesign remain separate."
+  },
+  "evidence": [
+    {
+      "id": "public-http",
+      "label": "Public local HTTP checks before redesign",
+      "value": {"routes": 6, "http_status": 200},
+      "as_of": "2026-10-29",
+      "source": {"reference": "/making-of/#methodology", "label": "Curated pre-redesign local acceptance snapshot", "provenance": "historical-snapshot", "boundary": "Status checks only; not visual acceptance, current uptime or redesign verification."}
+    },
+    {
+      "id": "private-http",
+      "label": "Anonymous protected requests before redesign",
+      "value": {"routes": 11, "http_status": 302},
+      "as_of": "2026-10-29",
+      "source": {"reference": "/making-of/#methodology", "label": "Curated pre-redesign local acceptance snapshot", "provenance": "historical-snapshot", "boundary": "Checked anonymous redirects only; not successful member authentication or a comprehensive security audit."}
+    },
+    {
+      "id": "link-crawl",
+      "label": "Earlier website link crawl",
+      "value": {"links_checked": 78},
+      "as_of": "2026-10-29",
+      "source": {"reference": "/making-of/#methodology", "label": "Curated prior website crawl recorded before redesign", "provenance": "historical-snapshot", "boundary": "The exact crawl time is not published. This is the record date, not a new crawl or a claim about redesigned links."}
+    },
+    {
+      "id": "owner-sign-in",
+      "label": "Owner observation of real sign-in before redesign",
+      "value": "Owner confirmed sign-in works",
+      "as_of": "2026-10-29",
+      "source": {"reference": "/making-of/#methodology", "label": "Owner confirmation recorded in the redesign brief", "provenance": "human-observation", "boundary": "Not an automated end-to-end redesign check. Credentials and private sessions are not public evidence."}
+    },
+    {
+      "id": "scoped-deliveries",
+      "label": "Scoped redesign deliveries",
+      "value": {"verified_worker_cuts": 4, "verified_integration_cuts": 1, "assembled_acceptance": "local operator smoke passed"},
+      "as_of": "2026-10-29",
+      "source": {"reference": "/making-of/#responsibilities", "label": "Completed supervisor delivery ledger observed by the operator", "provenance": "supervisor-receipt-summary", "boundary": "Four independent implementation cuts plus one integration cut passed their declared verifiers. This is not owner approval or deployment of the redesigned site."}
+    },
+    {
+      "id": "redesign-acceptance",
+      "label": "Independent local assembled-redesign verification",
+      "value": {"supervisor_cut_verifiers": "5/5", "responsive_views": 16, "viewport_widths": [320, 390, 768, 1280], "public_http_routes": 9, "controlled_private_http_routes": 7, "anonymous_and_forged_private_denials": 14, "owner_approval": "pending", "redesign_deployment": "not performed"},
+      "as_of": "2026-10-29",
+      "source": {"reference": "/making-of/#methodology", "label": "Operator observations of the running assembled local candidate", "provenance": "operator-runtime-smoke", "boundary": "Browser checks covered reading order, menu, article navigation, reduced motion and reading without remote API access. Signed local test sessions checked private serving; they do not claim a fresh official enrollment or owner acceptance."}
+    },
+    {
+      "id": "main-pl-en-acceptance",
+      "label": "Main-checkout Polish and English correction",
+      "value": {"implementation_roles": 2, "integration_owner": 1, "publisher_behavior_tests": 12, "public_pages": 22, "public_page_viewport_checks": 44, "own_member_pages": 12, "member_page_viewport_checks": 24, "protected_paths": 15, "anonymous_denials": 15, "forged_session_denials": 15, "controlled_session_successes": 15, "original_protected_records_sha256_preserved": 3, "owner_approval": "pending"},
+      "as_of": "2026-10-29",
+      "source": {"reference": "/making-of/#methodology", "label": "Operator observations of the running main-checkout PL/EN candidate", "provenance": "operator-runtime-smoke", "boundary": "Includes actual language switching, keyboard menu, localized chart scrolling, copy feedback and a closed member return path. Controlled sessions verify serving, not a new human enrollment. Historical redesign counts above retain their original scope."}
+    }
+  ]
+}

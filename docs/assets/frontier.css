@@ -1,0 +1,482 @@
+/* ══════════════════════════════════════════════════════════════════════
+   frontier.css — the design language of me·gad·ev
+   plan frontier-megadev-261028 · cut W1-1-tokens-monaspace (brief W1-A)
+
+   One stylesheet, one type family, no network. Three sources, each named:
+
+   [mega]   https://mega.dev public CSS, fetched 2026-10-28
+            (/_next/static/immutable/chunks/*.css, :root block). Taken: the
+            black ladder 050505 / 0a0a0a / 101010 / 1b1b1b / 2f2f2f, ink
+            f2f2ee / d9d9d4 / a6a6af, red accent, blue 1px grid, 42.5rem
+            measure, .08em label tracking, ease cubic-bezier(.23,1,.32,1).
+   [quantum] quantum-replit static/css/styles.css @ e3daa19 (read-only donor).
+            Taken: 2px scanline overlay (l.180), step-end cursor blink
+            (l.439), phosphor green, the BIOS/POST rhetoric of a gate.
+   [mona]   Monaspace v1.400 static webfonts, github.com/githubnext/monaspace,
+            OFL-1.1, see fonts/LICENSE-monaspace.txt for sha256 of each file.
+            Neon = body + code, Xenon Bold = display.
+
+   Why Xenon: mega.dev sets headings in a serif (Argent Pixel → Georgia).
+   Xenon is Monaspace's slab-serif cut, so headings keep that serif nod
+   while the whole page stays on one monospaced grid.
+
+   Layers: 1 faces · 2 tokens · 3 legacy aliases · 4 base · 5 layout
+           6 components · 7 BIOS motifs · 8 motion + a11y
+   ══════════════════════════════════════════════════════════════════════ */
+
+
+/* ── 1 · faces ─────────────────────────────────────────────────────────
+   Paths are relative to this file, so they resolve the same from
+   docs/index.html and docs/journal/index.html. font-display: swap keeps
+   text visible while the woff2 lands; the local stack takes over if it
+   never does. Every glyph used below (Polish diacritics, ✦ · ▸ ░▒▓█ and
+   box drawing) is present in all three files, checked with fontTools. */
+
+@font-face {
+  font-family: 'Monaspace Neon';
+  src: url('fonts/MonaspaceNeon-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Monaspace Neon';
+  src: url('fonts/MonaspaceNeon-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Monaspace Xenon';
+  src: url('fonts/MonaspaceXenon-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ── 2 · tokens ────────────────────────────────────────────────────────
+   Names describe a role, not a colour, so a palette swap is one edit. */
+
+:root {
+  color-scheme: dark;
+
+  /* surfaces — the [mega] black ladder */
+  --bg:          #050505;   /* page */
+  --raise:       #0d0d0d;   /* cards, articles, cells */
+  --raise-2:     #1b1b1b;   /* hover, table head, code wells */
+  --line:        #2f2f2f;   /* hairlines */
+  --line-strong: #4a4a52;   /* hover borders, focused edges */
+
+  /* ink */
+  --ink:       #f2f2ee;     /* headings, emphasis */
+  --ink-body:  #d9d9d4;     /* running text */
+  --dim:       #a6a6af;     /* meta, captions, axis labels (8.44:1 on --bg, WCAG AAA) */
+  --faint:     #5f5f68;     /* decoration only (3.23:1) — never for text you must read */
+
+  /* signal */
+  --accent:       #ff3b30;                  /* [mega] #f00 warmed: 5.75:1 on --bg, 4.86:1 on --raise-2 */
+  --accent-soft:  #ff6a60;
+  --accent-faint: rgba(255, 59, 48, 0.12);
+  --phosphor:       #4ade80;                /* [mega] green ≈ [quantum] phosphor */
+  --phosphor-faint: rgba(74, 222, 128, 0.12);
+  --link:       #7a7aff;                    /* [mega] blue text */
+  --grid-blue:  rgba(0, 0, 255, 0.10);      /* [mega] grid line */
+
+  /* chips — done / wait / todo, each a fg + bg pair */
+  --chip-done-fg: var(--phosphor);
+  --chip-done-bg: var(--phosphor-faint);
+  --chip-wait-fg: var(--dim);
+  --chip-wait-bg: rgba(242, 242, 238, 0.06);
+  --chip-todo-fg: var(--accent-soft);
+  --chip-todo-bg: var(--accent-faint);
+
+  /* type — Monaspace only, local mono stack as the offline fallback */
+  --font-mono:    'Monaspace Neon', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-display: 'Monaspace Xenon', 'Monaspace Neon', ui-monospace, Menlo, monospace;
+
+  --text-2xs: 0.68rem;      /* chips, table heads */
+  --text-xs:  0.75rem;      /* meta, mono headers */
+  --text-sm:  0.875rem;     /* tables, notes */
+  --text-md:  0.95rem;      /* body — mono reads large, so a notch under 1rem */
+  --text-lg:  1.05rem;      /* lead paragraphs, h3 */
+  --text-h1:  clamp(1.9rem, 5.2vw, 3rem);
+
+  --leading-tight: 1.1;
+  --leading-body:  1.65;
+  --tracking-label: 0.18em;  /* mono headers (uppercase) */
+  --tracking-tight: -0.02em; /* display */
+
+  /* space + shape */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 72px;
+  --radius:    4px;          /* terminal-square, a nod not a pill */
+  --radius-lg: 6px;
+  --measure:   62ch;
+  --wrap:      880px;
+
+  /* motion — [mega] easing and durations */
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-fast: 0.2s;
+  --dur:      0.35s;
+}
+
+
+/* ── 3 · legacy aliases ────────────────────────────────────────────────
+   docs/index.html and docs/journal/index.html still carry inline :root
+   blocks with these names (gold-on-dark, Space Grotesk + JetBrains Mono).
+   Mapping them here lets W1-B link this file first and delete the inline
+   blocks without a single selector breaking mid-rebuild. Remove this
+   layer once neither page references a name below. */
+
+:root {
+  --bg-raise:  var(--raise);
+  --ink-dim:   var(--dim);
+  --gold:      var(--accent);
+  --gold-soft: var(--accent-soft);
+  --gold-faint: var(--accent-faint);
+  --mono:      var(--font-mono);
+  --sans:      var(--font-mono);   /* deliberate: there is no sans any more */
+}
+
+
+/* ── 4 · base ──────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--ink-body);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  line-height: var(--leading-body);
+  font-feature-settings: 'calt' 1, 'liga' 0;  /* texture healing on, ligatures off */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: var(--accent); color: var(--bg); }
+
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid currentColor; }
+a:hover { color: var(--ink); }
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+strong, b { color: var(--ink); font-weight: 700; }
+em { font-style: normal; color: var(--ink); }
+
+code, kbd, samp, pre { font-family: var(--font-mono); font-size: 0.92em; }
+code {
+  background: var(--raise-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0 0.35em;
+  color: var(--ink);
+}
+pre {
+  background: var(--raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--s4);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+pre code { background: none; border: 0; padding: 0; }
+/* verbatim course text — wraps instead of scrolling, keeps the entry's own line breaks */
+pre.startpoint { white-space: pre-wrap; overflow-wrap: anywhere; }
+kbd {
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius);
+  padding: 0 0.35em;
+  color: var(--ink);
+}
+
+
+/* ── 5 · layout ────────────────────────────────────────────────────── */
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--s4); }
+
+header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--s6) 0 0;
+}
+
+.monogram {
+  font-size: var(--text-md);
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  text-decoration: none;
+  border: 0;
+}
+.monogram b { color: var(--accent); }
+
+.gh {
+  font-size: var(--text-xs);
+  color: var(--dim);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1px;
+}
+.gh:hover { color: var(--ink); border-color: var(--line-strong); }
+
+.hero { padding: var(--s8) 0 var(--s7); }
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-h1);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+}
+h1 em { color: var(--accent); }
+
+.hero p,
+.lead {
+  margin-top: var(--s4);
+  max-width: var(--measure);
+  color: var(--dim);
+  font-size: var(--text-lg);
+}
+.hero p em, .lead em { color: var(--ink); }
+
+section { padding: var(--s7) 0; border-top: 1px solid var(--line); }
+
+/* mono header — the section label every page uses.
+   Reads like a BIOS menu entry: ▸ SEASON 1 */
+h2,
+.mono-header {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--dim);
+  margin-bottom: var(--s5);
+}
+h2::before,
+.mono-header::before { content: '▸ '; color: var(--accent); }
+
+h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: var(--s6) 0 var(--s7);
+  font-size: var(--text-xs);
+  color: var(--dim);
+}
+footer .sig { font-size: var(--text-2xs); margin-top: var(--s2); color: var(--dim); }
+
+
+/* ── 6 · components ────────────────────────────────────────────────── */
+
+/* cards — one challenge per card */
+.cards { display: grid; gap: var(--s4); }
+
+.card {
+  position: relative;
+  background: var(--raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--s5);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.card:hover { border-color: var(--line-strong); }
+.card-top { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; }
+.card .code { font-size: var(--text-xs); color: var(--accent); letter-spacing: 0.06em; }
+.card p { margin-top: var(--s3); color: var(--dim); max-width: var(--measure); }
+
+/* status pill on a card — same grammar as chips, outlined */
+.status {
+  margin-left: auto;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px var(--s2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--dim);
+  white-space: nowrap;
+}
+.status.live { color: var(--phosphor); border-color: var(--phosphor); }
+.status.live::before { content: '● '; }
+
+/* chips — tracker states, filled */
+.chip {
+  display: inline-block;
+  font-size: var(--text-2xs);
+  padding: 1px var(--s2);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  background: var(--chip-wait-bg);
+  color: var(--chip-wait-fg);
+}
+.chip.done { background: var(--chip-done-bg); color: var(--chip-done-fg); }
+.chip.wait { background: var(--chip-wait-bg); color: var(--chip-wait-fg); }
+.chip.todo { background: var(--chip-todo-bg); color: var(--chip-todo-fg); }
+.chip.done::before { content: '✓ '; }
+.chip.todo::before { content: '✗ '; }
+
+/* tables — ledgers, matrices, verifier output */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+th {
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+  text-align: left;
+  padding: var(--s2) var(--s3);
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--raise-2);
+}
+td { padding: var(--s3); border-bottom: 1px solid var(--line); vertical-align: top; }
+td:first-child { white-space: nowrap; color: var(--ink); }
+tbody tr:hover td { background: var(--raise); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* journal entries */
+article {
+  background: var(--raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--s5) var(--s5);
+  margin-bottom: var(--s4);
+}
+article .meta { font-size: var(--text-xs); color: var(--dim); margin: var(--s1) 0 var(--s3); }
+article p { color: var(--dim); margin-bottom: var(--s3); }
+article p strong { color: var(--ink); }
+article ul, article ol { margin: 0 0 var(--s3) var(--s5); color: var(--dim); }
+article li { margin-bottom: var(--s2); }
+article li b { color: var(--accent); }
+
+.note { font-size: var(--text-sm); color: var(--dim); margin-top: var(--s3); }
+
+/* bench grid — vendors × tiers, laid on the [mega] blue 1px grid */
+.bench-intro { color: var(--dim); max-width: var(--measure); margin-bottom: var(--s5); }
+.bench-intro strong { color: var(--ink); }
+
+.grid {
+  display: grid;
+  grid-template-columns: auto repeat(3, 1fr);
+  gap: var(--s2);
+  font-size: var(--text-xs);
+  padding: var(--s3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(var(--grid-blue) 1px, transparent 1px) 0 0 / 20px 20px,
+    linear-gradient(90deg, var(--grid-blue) 1px, transparent 1px) 0 0 / 20px 20px,
+    var(--bg);
+}
+.grid .axis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+  padding: var(--s3) var(--s2);
+}
+.grid .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  background: var(--raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+.grid .cell:empty::before { content: '░░░'; color: var(--faint); letter-spacing: 0.1em; }
+.grid-note { margin-top: var(--s3); font-size: var(--text-xs); color: var(--dim); }
+
+
+/* ── 7 · BIOS motifs ([quantum]) ───────────────────────────────────────
+   Opt-in, never default: a page earns them by adding a class. */
+
+/* .crt on <body>: the donor's 2px scanlines, at half its opacity so long
+   journal reads stay comfortable */
+body.crt::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(rgba(5, 5, 5, 0) 50%, rgba(0, 0, 0, 0.08) 50%);
+  background-size: 100% 2px;
+}
+
+/* .cursor — step-end blink, the donor's timing */
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: frontier-blink 1.2s step-end infinite;
+}
+@keyframes frontier-blink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* .prompt — a shell line: $ command */
+.prompt { color: var(--ink); }
+.prompt::before { content: '$ '; color: var(--phosphor); }
+
+/* .gate — a POST-screen block for verifier verdicts:
+   <div class="gate"><span class="gate-k">tokens</span> <span class="ok">OK</span></div> */
+.gate {
+  font-size: var(--text-sm);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: var(--s3) var(--s4);
+  line-height: 1.8;
+}
+.gate-k { color: var(--dim); }
+.gate-k::after { content: ' ........'; color: var(--faint); }
+.ok   { color: var(--phosphor); font-weight: 700; }
+.fail { color: var(--accent);   font-weight: 700; }
+.ok::before   { content: '['; color: var(--dim); }
+.ok::after    { content: ']'; color: var(--dim); }
+.fail::before { content: '['; color: var(--dim); }
+.fail::after  { content: ']'; color: var(--dim); }
+
+/* .rule — a box-drawing divider when an <hr> is too quiet */
+.rule { color: var(--faint); overflow: hidden; white-space: nowrap; user-select: none; }
+.rule::before { content: '────────────────────────────────────────────────────────────────────────────────────────'; }
+
+
+/* ── 8 · motion + a11y ─────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .cursor { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: var(--s7) 0 var(--s6); }
+  .status { margin-left: 0; }
+  td, th { padding: var(--s2) var(--s2); }
+  .grid { padding: var(--s2); gap: var(--s1); }
+}
+
+@media print {
+  body.crt::before { display: none; }
+  body { background: #fff; color: #000; }
+}

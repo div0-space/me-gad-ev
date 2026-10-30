@@ -1,0 +1,54 @@
+{
+  "schema": "me-gad-ev.og.v1",
+  "requested_at": "2026-10-30T14:49:26.635598+00:00",
+  "method": "Authored layout with unchanged embedded masthead and real Art API glyph margins; not image-model output",
+  "width": 1200,
+  "height": 630,
+  "sources": [
+    {
+      "path": "docs/assets/art/masthead.svg",
+      "sha256": "59b7b863538d4125ec30d5092793322c390a4be4e953c011cbedbc5f77ff559c"
+    },
+    {
+      "path": "docs/assets/fonts/MonaspaceXenon-Bold.woff2",
+      "sha256": "c156f532e8ca566d5f5e6854cac1fdb1f614127b2f8b5d6a6d62aa7b29282c14"
+    },
+    {
+      "path": "docs/assets/fonts/MonaspaceNeon-Regular.woff2",
+      "sha256": "6b6980f24d115e98e96b1a5d06a5a7fe6454de9b216d479a7e6923c0456a5f41"
+    }
+  ],
+  "requests": [
+    {
+      "endpoint": "/api/art/stylize",
+      "parameters": {
+        "text": "Field notes",
+        "styles": [
+          "smallCaps"
+        ]
+      },
+      "response_sha256": "b8478dbc0ae5744cd9a0c98db6a257a2cc80e7088fb034888b910f04f4bbe667",
+      "response": "{\"status\":\"ok\",\"variants\":{\"smallCaps\":{\"key\":\"smallCaps\",\"name\":\"Small Caps\",\"preview\":\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\",\"metrics\":{\"characterCount\":11,\"codePointCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":18},\"platforms\":{\"twitter\":{\"platform\":\"twitter\",\"label\":\"Twitter/X\",\"text\":\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\",\"rawText\":\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Compact enough for X and usually renders as pasted.\",\"characterCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":18,\"hardLimit\":280,\"remaining\":262,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":26,\"maxLines\":4,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\"]}},\"instagram\":{\"platform\":\"instagram\",\"label\":\"Instagram\",\"text\":\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\",\"rawText\":\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Paste-stable and readable on most mobile clients.\",\"characterCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":18,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":22,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\"]}},\"tiktok\":{\"platform\":\"tiktok\",\"label\":\"TikTok\",\"text\":\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\",\"rawText\":\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Safe decorative Latin variants for quick mobile sharing.\",\"characterCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":18,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":18,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜰɪᴇʟᴅ ɴᴏᴛᴇꜱ\"]}}}}},\"metadata\":{\"unsupportedGlyphs\":[],\"combiningFallback\":true}}"
+    },
+    {
+      "endpoint": "/api/art/transform",
+      "parameters": {
+        "text": "The Journal",
+        "mode": "decorate",
+        "style": "box"
+      },
+      "response_sha256": "57bab7e9ba6d72ca688b048db031f331819e85f3d90a948299977c0c1614a55b",
+      "response": "{\"status\":\"ok\",\"result\":\"╭─────────────╮\\n│ The Journal │\\n╰─────────────╯\"}"
+    }
+  ],
+  "assets": [
+    {
+      "path": "journal-og.svg",
+      "sha256": "894724ebf12547cad67d7d8984911d57e9079129f521d21dcf819668c78b00aa"
+    },
+    {
+      "path": "journal-og.png",
+      "sha256": "469c1a1e64e66319f82a790fcf18557e5be6fe9327d33120cb56029831ed8405"
+    }
+  ]
+}

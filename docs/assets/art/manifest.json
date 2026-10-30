@@ -1,0 +1,229 @@
+{
+  "schema": "me-gad-ev.art.v1",
+  "generated_at": "2026-10-29T21:25:36.516884+00:00",
+  "method": "Authored SVG compositions using returned API glyph material",
+  "assets": [
+    {
+      "path": "masthead.svg",
+      "sha256": "59b7b863538d4125ec30d5092793322c390a4be4e953c011cbedbc5f77ff559c",
+      "requests": [
+        {
+          "endpoint": "/api/art/stylize",
+          "parameters": {
+            "text": "The Journal",
+            "styles": [
+              "smallCaps"
+            ]
+          },
+          "response_sha256": "9d488010160dafc00a14a8559847c0ed3419698efa4131b38bb8bac2e4482fc1",
+          "response": "{\"status\":\"ok\",\"variants\":{\"smallCaps\":{\"key\":\"smallCaps\",\"name\":\"Small Caps\",\"preview\":\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\",\"metrics\":{\"characterCount\":11,\"codePointCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":17},\"platforms\":{\"twitter\":{\"platform\":\"twitter\",\"label\":\"Twitter/X\",\"text\":\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\",\"rawText\":\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Compact enough for X and usually renders as pasted.\",\"characterCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":17,\"hardLimit\":280,\"remaining\":263,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":26,\"maxLines\":4,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\"]}},\"instagram\":{\"platform\":\"instagram\",\"label\":\"Instagram\",\"text\":\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\",\"rawText\":\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Paste-stable and readable on most mobile clients.\",\"characterCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":17,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":22,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\"]}},\"tiktok\":{\"platform\":\"tiktok\",\"label\":\"TikTok\",\"text\":\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\",\"rawText\":\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Safe decorative Latin variants for quick mobile sharing.\",\"characterCount\":11,\"mobileWidth\":11,\"twitterWeightedLength\":17,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":18,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ\"]}}}}},\"metadata\":{\"unsupportedGlyphs\":[],\"combiningFallback\":true}}"
+        },
+        {
+          "endpoint": "/api/art/transform",
+          "parameters": {
+            "text": "The Journal",
+            "mode": "decorate",
+            "style": "box"
+          },
+          "response_sha256": "57bab7e9ba6d72ca688b048db031f331819e85f3d90a948299977c0c1614a55b",
+          "response": "{\"status\":\"ok\",\"result\":\"╭─────────────╮\\n│ The Journal │\\n╰─────────────╯\"}"
+        },
+        {
+          "endpoint": "/api/art/emotionize",
+          "parameters": {
+            "text": "The Journal",
+            "mode": "full",
+            "emotion": "curiosity"
+          },
+          "response_sha256": "4aee0d6c96ded418ca2688ff38cdd312f655a0629804bc9611b1acca0861b8b7",
+          "response": "{\"status\":\"ok\",\"variants\":[{\"key\":\"romantic\",\"name\":\"Romantic Whisper\",\"description\":\"Soft calligraphy wrapped in hearts and gentle spacing.\",\"recommended\":false,\"preview\":\"♡ 𝓣𝓱𝓮 𝓙𝓸𝓾𝓻𝓷𝓪𝓵 ♡\"},{\"key\":\"dream\",\"name\":\"Dream Field\",\"description\":\"Vaporwave drift with star halos and airy rhythm.\",\"recommended\":false,\"preview\":\"✦ ✧ ⋆ ✩\\nＴｈｅ Ｊｏｕｒｎａｌ\\n✦ ✧ ⋆ ✩\"},{\"key\":\"glitch\",\"name\":\"Signal Glitch\",\"description\":\"Fragmented monospace layered with noise marks.\",\"recommended\":false,\"preview\":\"𝚃̷𝚑̴𝚎̸ 𝙹͟𝚘͢𝚞͜𝚛͠𝚗̷𝚊̴𝚕̸\"},{\"key\":\"cosmic\",\"name\":\"Cosmic Oath\",\"description\":\"Bold double-struck letters orbiting in cosmic frames.\",\"recommended\":false,\"preview\":\"☄ ✶ ☽ 𝕋𝕙𝕖 𝕁𝕠𝕦𝕣𝕟𝕒𝕝 ☾ ☼ ☽\"},{\"key\":\"minimal\",\"name\":\"Minimal Echo\",\"description\":\"Lowercase small caps with quiet ellipses.\",\"recommended\":true,\"preview\":\"··· ᴛʜᴇ ᴊᴏᴜʀɴᴀʟ ···\"}]}"
+        }
+      ]
+    },
+    {
+      "path": "s01e01.svg",
+      "sha256": "f93efde9fe86ba65226bb9e1710c2c3085e1b93e90458dc36529c831460238e8",
+      "requests": [
+        {
+          "endpoint": "/api/art/stylize",
+          "parameters": {
+            "text": "First contact",
+            "styles": [
+              "smallCaps"
+            ]
+          },
+          "response_sha256": "83845939fb04254ef2b680ea8cc3e2cd791ce117b3b3a0ff3536983563c56904",
+          "response": "{\"status\":\"ok\",\"variants\":{\"smallCaps\":{\"key\":\"smallCaps\",\"name\":\"Small Caps\",\"preview\":\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\",\"metrics\":{\"characterCount\":13,\"codePointCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":22},\"platforms\":{\"twitter\":{\"platform\":\"twitter\",\"label\":\"Twitter/X\",\"text\":\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\",\"rawText\":\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Compact enough for X and usually renders as pasted.\",\"characterCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":22,\"hardLimit\":280,\"remaining\":258,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":26,\"maxLines\":4,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\"]}},\"instagram\":{\"platform\":\"instagram\",\"label\":\"Instagram\",\"text\":\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\",\"rawText\":\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Paste-stable and readable on most mobile clients.\",\"characterCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":22,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":22,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\"]}},\"tiktok\":{\"platform\":\"tiktok\",\"label\":\"TikTok\",\"text\":\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\",\"rawText\":\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Safe decorative Latin variants for quick mobile sharing.\",\"characterCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":22,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":18,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ\"]}}}}},\"metadata\":{\"unsupportedGlyphs\":[],\"combiningFallback\":true}}"
+        },
+        {
+          "endpoint": "/api/art/transform",
+          "parameters": {
+            "text": "First contact",
+            "mode": "decorate",
+            "style": "box"
+          },
+          "response_sha256": "d0f428b69f62c59cb72bc2a396e82807d320fb2533bd0e2f0a5a79748d9fb1e9",
+          "response": "{\"status\":\"ok\",\"result\":\"╭───────────────╮\\n│ First contact │\\n╰───────────────╯\"}"
+        },
+        {
+          "endpoint": "/api/art/emotionize",
+          "parameters": {
+            "text": "First contact",
+            "mode": "full",
+            "emotion": "curiosity"
+          },
+          "response_sha256": "466dd43d6286618c59a1cc4ce6c535e89c27d271e5d3703cda479c0167fc37d5",
+          "response": "{\"status\":\"ok\",\"variants\":[{\"key\":\"romantic\",\"name\":\"Romantic Whisper\",\"description\":\"Soft calligraphy wrapped in hearts and gentle spacing.\",\"recommended\":false,\"preview\":\"♡ 𝓕𝓲𝓻𝓼𝓽 𝓬𝓸𝓷𝓽𝓪𝓬𝓽 ♡\"},{\"key\":\"dream\",\"name\":\"Dream Field\",\"description\":\"Vaporwave drift with star halos and airy rhythm.\",\"recommended\":false,\"preview\":\"✦ ✧ ⋆ ✩\\nＦｉｒｓｔ ｃｏｎｔａｃｔ\\n✦ ✧ ⋆ ✩\"},{\"key\":\"glitch\",\"name\":\"Signal Glitch\",\"description\":\"Fragmented monospace layered with noise marks.\",\"recommended\":false,\"preview\":\"𝙵̷𝚒̴𝚛̸𝚜͟𝚝͢ 𝚌͜𝚘͠𝚗̷𝚝̴𝚊̸𝚌͟𝚝͢\"},{\"key\":\"cosmic\",\"name\":\"Cosmic Oath\",\"description\":\"Bold double-struck letters orbiting in cosmic frames.\",\"recommended\":false,\"preview\":\"☄ ✶ ☽ 𝔽𝕚𝕣𝕤𝕥 𝕔𝕠𝕟𝕥𝕒𝕔𝕥 ☾ ☼ ☽\"},{\"key\":\"minimal\",\"name\":\"Minimal Echo\",\"description\":\"Lowercase small caps with quiet ellipses.\",\"recommended\":true,\"preview\":\"··· ꜰɪʀꜱᴛ ᴄᴏɴᴛᴀᴄᴛ ···\"}]}"
+        }
+      ]
+    },
+    {
+      "path": "s01e02.svg",
+      "sha256": "7c2494eaea7e854ceac8606edec74ab8c30d63f5f76661004f8e7d714a2bbf42",
+      "requests": [
+        {
+          "endpoint": "/api/art/stylize",
+          "parameters": {
+            "text": "Signal and noise",
+            "styles": [
+              "smallCaps"
+            ]
+          },
+          "response_sha256": "9bc3d1c8c7b7e6d5d390d908c3588dcff977314cd8d78b44dc81efbf957f88db",
+          "response": "{\"status\":\"ok\",\"variants\":{\"smallCaps\":{\"key\":\"smallCaps\",\"name\":\"Small Caps\",\"preview\":\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\",\"metrics\":{\"characterCount\":16,\"codePointCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":23},\"platforms\":{\"twitter\":{\"platform\":\"twitter\",\"label\":\"Twitter/X\",\"text\":\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\",\"rawText\":\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Compact enough for X and usually renders as pasted.\",\"characterCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":23,\"hardLimit\":280,\"remaining\":257,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":26,\"maxLines\":4,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\"]}},\"instagram\":{\"platform\":\"instagram\",\"label\":\"Instagram\",\"text\":\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\",\"rawText\":\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Paste-stable and readable on most mobile clients.\",\"characterCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":23,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":22,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\"]}},\"tiktok\":{\"platform\":\"tiktok\",\"label\":\"TikTok\",\"text\":\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\",\"rawText\":\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Safe decorative Latin variants for quick mobile sharing.\",\"characterCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":23,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":18,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ\"]}}}}},\"metadata\":{\"unsupportedGlyphs\":[],\"combiningFallback\":true}}"
+        },
+        {
+          "endpoint": "/api/art/transform",
+          "parameters": {
+            "text": "Signal and noise",
+            "mode": "decorate",
+            "style": "box"
+          },
+          "response_sha256": "0ee2d5c9a1c50e9b659b035e3926f22a52591a16dcfd4fd03d09b671c90ba041",
+          "response": "{\"status\":\"ok\",\"result\":\"╭──────────────────╮\\n│ Signal and noise │\\n╰──────────────────╯\"}"
+        },
+        {
+          "endpoint": "/api/art/emotionize",
+          "parameters": {
+            "text": "Signal and noise",
+            "mode": "full",
+            "emotion": "curiosity"
+          },
+          "response_sha256": "04ed68b86a41dd7459e52e22daa99c53f11994275a329e2ee7d0f4f47cf048eb",
+          "response": "{\"status\":\"ok\",\"variants\":[{\"key\":\"romantic\",\"name\":\"Romantic Whisper\",\"description\":\"Soft calligraphy wrapped in hearts and gentle spacing.\",\"recommended\":false,\"preview\":\"♡ 𝓢𝓲𝓰𝓷𝓪𝓵 𝓪𝓷𝓭 𝓷𝓸𝓲𝓼𝓮 ♡\"},{\"key\":\"dream\",\"name\":\"Dream Field\",\"description\":\"Vaporwave drift with star halos and airy rhythm.\",\"recommended\":false,\"preview\":\"✦ ✧ ⋆ ✩\\nＳｉｇｎａｌ ａｎｄ ｎｏｉｓｅ\\n✦ ✧ ⋆ ✩\"},{\"key\":\"glitch\",\"name\":\"Signal Glitch\",\"description\":\"Fragmented monospace layered with noise marks.\",\"recommended\":false,\"preview\":\"𝚂̷𝚒̴𝚐̸𝚗͟𝚊͢𝚕͜ 𝚊͠𝚗̷𝚍̴ 𝚗̸𝚘͟𝚒͢𝚜͜𝚎͠\"},{\"key\":\"cosmic\",\"name\":\"Cosmic Oath\",\"description\":\"Bold double-struck letters orbiting in cosmic frames.\",\"recommended\":false,\"preview\":\"☄ ✶ ☽ 𝕊𝕚𝕘𝕟𝕒𝕝 𝕒𝕟𝕕 𝕟𝕠𝕚𝕤𝕖 ☾ ☼ ☽\"},{\"key\":\"minimal\",\"name\":\"Minimal Echo\",\"description\":\"Lowercase small caps with quiet ellipses.\",\"recommended\":true,\"preview\":\"··· ꜱɪɢɴᴀʟ ᴀɴᴅ ɴᴏɪꜱᴇ ···\"}]}"
+        }
+      ]
+    },
+    {
+      "path": "s01e03.svg",
+      "sha256": "7f3e5a6dfd24f31173671f4b77e9e7501d0f85098ccbd951ee0d3ddcd3fb6cc9",
+      "requests": [
+        {
+          "endpoint": "/api/art/stylize",
+          "parameters": {
+            "text": "Across the threshold",
+            "styles": [
+              "smallCaps"
+            ]
+          },
+          "response_sha256": "2546adec61e871d85b436fb8305658a8e7aa1db326d120a169665365953029ab",
+          "response": "{\"status\":\"ok\",\"variants\":{\"smallCaps\":{\"key\":\"smallCaps\",\"name\":\"Small Caps\",\"preview\":\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\",\"metrics\":{\"characterCount\":20,\"codePointCount\":20,\"mobileWidth\":20,\"twitterWeightedLength\":32},\"platforms\":{\"twitter\":{\"platform\":\"twitter\",\"label\":\"Twitter/X\",\"text\":\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\",\"rawText\":\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Compact enough for X and usually renders as pasted.\",\"characterCount\":20,\"mobileWidth\":20,\"twitterWeightedLength\":32,\"hardLimit\":280,\"remaining\":248,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":26,\"maxLines\":4,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\"]}},\"instagram\":{\"platform\":\"instagram\",\"label\":\"Instagram\",\"text\":\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\",\"rawText\":\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Paste-stable and readable on most mobile clients.\",\"characterCount\":20,\"mobileWidth\":20,\"twitterWeightedLength\":32,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":22,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\"]}},\"tiktok\":{\"platform\":\"tiktok\",\"label\":\"TikTok\",\"text\":\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\",\"rawText\":\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Safe decorative Latin variants for quick mobile sharing.\",\"characterCount\":20,\"mobileWidth\":20,\"twitterWeightedLength\":32,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":18,\"maxLines\":3,\"lineCount\":2,\"truncated\":false,\"density\":\"balanced\",\"lines\":[\"ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏ\",\"ʟᴅ\"]}}}}},\"metadata\":{\"unsupportedGlyphs\":[],\"combiningFallback\":true}}"
+        },
+        {
+          "endpoint": "/api/art/transform",
+          "parameters": {
+            "text": "Across the threshold",
+            "mode": "decorate",
+            "style": "box"
+          },
+          "response_sha256": "1babc53f84f37b307beae759ecaa49cc38cb349df6bc4b83ab7ca3b2412afaef",
+          "response": "{\"status\":\"ok\",\"result\":\"╭──────────────────────╮\\n│ Across the threshold │\\n╰──────────────────────╯\"}"
+        },
+        {
+          "endpoint": "/api/art/emotionize",
+          "parameters": {
+            "text": "Across the threshold",
+            "mode": "full",
+            "emotion": "curiosity"
+          },
+          "response_sha256": "cd593cf9c798af7277555837be0213e477fc6439d2be39c311ad154552720b5b",
+          "response": "{\"status\":\"ok\",\"variants\":[{\"key\":\"romantic\",\"name\":\"Romantic Whisper\",\"description\":\"Soft calligraphy wrapped in hearts and gentle spacing.\",\"recommended\":false,\"preview\":\"♡ 𝓐𝓬𝓻𝓸𝓼𝓼 𝓽𝓱𝓮 𝓽𝓱𝓻𝓮𝓼𝓱𝓸𝓵𝓭 ♡\"},{\"key\":\"dream\",\"name\":\"Dream Field\",\"description\":\"Vaporwave drift with star halos and airy rhythm.\",\"recommended\":false,\"preview\":\"✦ ✧ ⋆ ✩\\nＡｃｒｏｓｓ ｔｈｅ ｔｈｒｅｓｈｏｌｄ\\n✦ ✧ ⋆ ✩\"},{\"key\":\"glitch\",\"name\":\"Signal Glitch\",\"description\":\"Fragmented monospace layered with noise marks.\",\"recommended\":false,\"preview\":\"𝙰̷𝚌̴𝚛̸𝚘͟𝚜͢𝚜͜ 𝚝͠𝚑̷𝚎̴ 𝚝̸𝚑͟𝚛͢𝚎͜𝚜͠𝚑̷𝚘̴𝚕̸𝚍͟\"},{\"key\":\"cosmic\",\"name\":\"Cosmic Oath\",\"description\":\"Bold double-struck letters orbiting in cosmic frames.\",\"recommended\":false,\"preview\":\"☄ ✶ ☽ 𝔸𝕔𝕣𝕠𝕤𝕤 𝕥𝕙𝕖 𝕥𝕙𝕣𝕖𝕤𝕙𝕠𝕝𝕕 ☾ ☼ ☽\"},{\"key\":\"minimal\",\"name\":\"Minimal Echo\",\"description\":\"Lowercase small caps with quiet ellipses.\",\"recommended\":true,\"preview\":\"··· ᴀᴄʀᴏꜱꜱ ᴛʜᴇ ᴛʜʀᴇꜱʜᴏʟᴅ ···\"}]}"
+        }
+      ]
+    },
+    {
+      "path": "vc-process.svg",
+      "sha256": "0151298259ebd41262b6ab865d50adf078510d8b837b62be0ab467b0be5f14b4",
+      "requests": [
+        {
+          "endpoint": "/api/art/stylize",
+          "parameters": {
+            "text": "Built with VC",
+            "styles": [
+              "smallCaps"
+            ]
+          },
+          "response_sha256": "5967822cd9e5e35d1cf9310513eb3e343208822084c83a5481a01ad3f345336d",
+          "response": "{\"status\":\"ok\",\"variants\":{\"smallCaps\":{\"key\":\"smallCaps\",\"name\":\"Small Caps\",\"preview\":\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\",\"metrics\":{\"characterCount\":13,\"codePointCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":19},\"platforms\":{\"twitter\":{\"platform\":\"twitter\",\"label\":\"Twitter/X\",\"text\":\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\",\"rawText\":\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Compact enough for X and usually renders as pasted.\",\"characterCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":19,\"hardLimit\":280,\"remaining\":261,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":26,\"maxLines\":4,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\"]}},\"instagram\":{\"platform\":\"instagram\",\"label\":\"Instagram\",\"text\":\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\",\"rawText\":\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Paste-stable and readable on most mobile clients.\",\"characterCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":19,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":22,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\"]}},\"tiktok\":{\"platform\":\"tiktok\",\"label\":\"TikTok\",\"text\":\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\",\"rawText\":\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Safe decorative Latin variants for quick mobile sharing.\",\"characterCount\":13,\"mobileWidth\":13,\"twitterWeightedLength\":19,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":18,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ\"]}}}}},\"metadata\":{\"unsupportedGlyphs\":[],\"combiningFallback\":true}}"
+        },
+        {
+          "endpoint": "/api/art/transform",
+          "parameters": {
+            "text": "Built with VC",
+            "mode": "decorate",
+            "style": "box"
+          },
+          "response_sha256": "0216dcd072b99507b0b5bf27c1f99dd16374a8274c413dc4b54f6b993d60034a",
+          "response": "{\"status\":\"ok\",\"result\":\"╭───────────────╮\\n│ Built with VC │\\n╰───────────────╯\"}"
+        },
+        {
+          "endpoint": "/api/art/emotionize",
+          "parameters": {
+            "text": "Built with VC",
+            "mode": "full",
+            "emotion": "curiosity"
+          },
+          "response_sha256": "d7e2ebff0d08589ef033a98b6dafb942f377c5f6883209e72e082fa31b333dd1",
+          "response": "{\"status\":\"ok\",\"variants\":[{\"key\":\"romantic\",\"name\":\"Romantic Whisper\",\"description\":\"Soft calligraphy wrapped in hearts and gentle spacing.\",\"recommended\":false,\"preview\":\"♡ 𝓑𝓾𝓲𝓵𝓽 𝔀𝓲𝓽𝓱 𝓥𝓒 ♡\"},{\"key\":\"dream\",\"name\":\"Dream Field\",\"description\":\"Vaporwave drift with star halos and airy rhythm.\",\"recommended\":false,\"preview\":\"✦ ✧ ⋆ ✩\\nＢｕｉｌｔ ｗｉｔｈ ＶＣ\\n✦ ✧ ⋆ ✩\"},{\"key\":\"glitch\",\"name\":\"Signal Glitch\",\"description\":\"Fragmented monospace layered with noise marks.\",\"recommended\":false,\"preview\":\"𝙱̷𝚞̴𝚒̸𝚕͟𝚝͢ 𝚠͜𝚒͠𝚝̷𝚑̴ 𝚅̸𝙲͟\"},{\"key\":\"cosmic\",\"name\":\"Cosmic Oath\",\"description\":\"Bold double-struck letters orbiting in cosmic frames.\",\"recommended\":false,\"preview\":\"☄ ✶ ☽ 𝔹𝕦𝕚𝕝𝕥 𝕨𝕚𝕥𝕙 𝕍ℂ ☾ ☼ ☽\"},{\"key\":\"minimal\",\"name\":\"Minimal Echo\",\"description\":\"Lowercase small caps with quiet ellipses.\",\"recommended\":true,\"preview\":\"··· ʙᴜɪʟᴛ ᴡɪᴛʜ ᴠᴄ ···\"}]}"
+        }
+      ]
+    },
+    {
+      "path": "divider.svg",
+      "sha256": "5e1775aec79c01b258badc7b3829fca05d71375a8c3def885fce4da744569990",
+      "requests": [
+        {
+          "endpoint": "/api/art/stylize",
+          "parameters": {
+            "text": "Continue reading",
+            "styles": [
+              "smallCaps"
+            ]
+          },
+          "response_sha256": "c204910dc49dff886721b7f0b269a83b49737d46d210961163024a9549ea96c6",
+          "response": "{\"status\":\"ok\",\"variants\":{\"smallCaps\":{\"key\":\"smallCaps\",\"name\":\"Small Caps\",\"preview\":\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\",\"metrics\":{\"characterCount\":16,\"codePointCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":24},\"platforms\":{\"twitter\":{\"platform\":\"twitter\",\"label\":\"Twitter/X\",\"text\":\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\",\"rawText\":\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Compact enough for X and usually renders as pasted.\",\"characterCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":24,\"hardLimit\":280,\"remaining\":256,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":26,\"maxLines\":4,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\"]}},\"instagram\":{\"platform\":\"instagram\",\"label\":\"Instagram\",\"text\":\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\",\"rawText\":\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Paste-stable and readable on most mobile clients.\",\"characterCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":24,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":22,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\"]}},\"tiktok\":{\"platform\":\"tiktok\",\"label\":\"TikTok\",\"text\":\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\",\"rawText\":\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\",\"support\":\"safe\",\"supportLabel\":\"Safe\",\"note\":\"Safe decorative Latin variants for quick mobile sharing.\",\"characterCount\":16,\"mobileWidth\":16,\"twitterWeightedLength\":24,\"hardLimit\":null,\"remaining\":null,\"differsFromBase\":false,\"overLimit\":false,\"simulation\":{\"lineBudget\":18,\"maxLines\":3,\"lineCount\":1,\"truncated\":false,\"density\":\"airy\",\"lines\":[\"ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ\"]}}}}},\"metadata\":{\"unsupportedGlyphs\":[],\"combiningFallback\":true}}"
+        },
+        {
+          "endpoint": "/api/art/transform",
+          "parameters": {
+            "text": "Continue reading",
+            "mode": "decorate",
+            "style": "box"
+          },
+          "response_sha256": "4f90db25a031b7476081899e64878a696bac018c41332bb076d939934014779c",
+          "response": "{\"status\":\"ok\",\"result\":\"╭──────────────────╮\\n│ Continue reading │\\n╰──────────────────╯\"}"
+        },
+        {
+          "endpoint": "/api/art/emotionize",
+          "parameters": {
+            "text": "Continue reading",
+            "mode": "full",
+            "emotion": "curiosity"
+          },
+          "response_sha256": "750202a27f7d43abed240fce69c7d09f1cd3d57db70d84c3c3ebbb70308ddec9",
+          "response": "{\"status\":\"ok\",\"variants\":[{\"key\":\"romantic\",\"name\":\"Romantic Whisper\",\"description\":\"Soft calligraphy wrapped in hearts and gentle spacing.\",\"recommended\":false,\"preview\":\"♡ 𝓒𝓸𝓷𝓽𝓲𝓷𝓾𝓮 𝓻𝓮𝓪𝓭𝓲𝓷𝓰 ♡\"},{\"key\":\"dream\",\"name\":\"Dream Field\",\"description\":\"Vaporwave drift with star halos and airy rhythm.\",\"recommended\":false,\"preview\":\"✦ ✧ ⋆ ✩\\nＣｏｎｔｉｎｕｅ ｒｅａｄｉｎｇ\\n✦ ✧ ⋆ ✩\"},{\"key\":\"glitch\",\"name\":\"Signal Glitch\",\"description\":\"Fragmented monospace layered with noise marks.\",\"recommended\":false,\"preview\":\"𝙲̷𝚘̴𝚗̸𝚝͟𝚒͢𝚗͜𝚞͠𝚎̷ 𝚛̴𝚎̸𝚊͟𝚍͢𝚒͜𝚗͠𝚐̷\"},{\"key\":\"cosmic\",\"name\":\"Cosmic Oath\",\"description\":\"Bold double-struck letters orbiting in cosmic frames.\",\"recommended\":false,\"preview\":\"☄ ✶ ☽ ℂ𝕠𝕟𝕥𝕚𝕟𝕦𝕖 𝕣𝕖𝕒𝕕𝕚𝕟𝕘 ☾ ☼ ☽\"},{\"key\":\"minimal\",\"name\":\"Minimal Echo\",\"description\":\"Lowercase small caps with quiet ellipses.\",\"recommended\":true,\"preview\":\"··· ᴄᴏɴᴛɪɴᴜᴇ ʀᴇᴀᴅɪɴɢ ···\"}]}"
+        }
+      ]
+    }
+  ]
+}

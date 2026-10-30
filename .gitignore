@@ -15,3 +15,15 @@ target/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+# local analysis caches
+.loctree/
+# Private operator handoffs and runtime evidence
+.vibecrafted/
+*.pyc
+# Local credentials, including root/studio environment files
+.env
+.env.*
+!.env.example
+# Historical course inputs and raw working records stay local
+/challenges/
+/drops/

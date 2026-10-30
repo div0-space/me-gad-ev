@@ -1,0 +1,30 @@
+# The Journal
+
+Maciej Gad · me·gad·ev. The Journal: stories about building and working with agents.
+
+## Read the work
+
+- / — The Journal
+- /challenge/ — Episodes — The Journal
+- /challenge/s01e01/ — S01E01 · Editing starts with a comparison — The Journal
+- /challenge/s01e02/ — S01E02 · A note for someone who missed the conversation — The Journal
+- /challenge/s01e03/ — S01E03 · The page still needs to be read — The Journal
+- /making-of/ — The workshop: built with VC — The Journal
+- /gate/ — Member sign-in — The Journal
+- /privacy/ — Privacy — The Journal
+- /journal/ — The Journal
+- /journal/feed.xml — RSS
+- /journal/before-the-service-goes-live/ — Before the service goes live
+- /journal/a-handoff-is-more-than-a-plan/ — A handoff is more than a plan
+- /journal/the-artifact-is-not-the-acceptance/ — The page still needs to be read
+- /journal/evidence-another-reader-can-use/ — A note for someone who missed the conversation
+- /journal/judgment-before-speed/ — Editing starts with a comparison
+
+## Course access
+
+Public pages need no login. Member records are held outside the public directory.
+Sign in through the gate page in the same browser. GET /gate/handshake returns connection details.
+The person signs in and approves a fresh OAuth connection at https://hq.mega.dev. Use only the returned same-origin /gate/login URL.
+The backend verifies enrollment through the official MCP, attempts to revoke the fresh tokens, discards them and sets its own HttpOnly cookie.
+Never copy existing credentials, tokens or codes into chat. GET /gate/check returns 200 for a valid cookie, otherwise 401.
+Errors never grant access. A static copy includes neither the gate service nor private records.

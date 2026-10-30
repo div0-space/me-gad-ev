@@ -1,0 +1,10 @@
+.gate-actions { display: grid; gap: var(--s3); max-width: var(--measure); margin-top: var(--s4); }
+.gate-actions button {
+  font: inherit; font-weight: 700; justify-self: start; cursor: pointer; color: var(--bg);
+  background: var(--accent-soft); border: 0; border-radius: var(--radius); padding: var(--s3) var(--s5);
+}
+.gate-actions button:hover { background: var(--ink); }
+.gate-actions button:disabled { opacity: .5; cursor: not-allowed; }
+.gate-actions button:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+#agent-prompt { white-space: pre-wrap; overflow-wrap: anywhere; }
+#verdict, #copy-status { min-height: 1.6em; margin-top: var(--s3); }
