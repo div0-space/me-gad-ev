@@ -159,9 +159,12 @@ stanu na żywo. Pięć publicznych wpisów jest dostępnych w PL i EN, najnowszy
 na początku. Metryka publiczna: [`MATRIX.md`](MATRIX.md).
 The Journal jest publikacją uczestnika, nie oficjalnym wydawnictwem kursu.
 
-Weryfikacja dostępu do witryny i serwer ćwiczeniowy to odrębne mechanizmy.
-Bramka używa oficjalnego OAuth; nie oznacza to ukończenia planowanego lustra MCP
-z izolowanymi uprawnieniami dla workerów.
+Weryfikacja dostępu do Journal i prywatny MCP to odrębne mechanizmy.
+Journal sprawdza uczestnictwo przez oficjalny OAuth. Nasz MCP jest wyłącznie
+dla zespołu i flot agentów: używa prywatnego tokenu Bearer, bez logowania OAuth.
+Brak lub błędny token daje `401` z informacją `private_mcp` i opisem nagłówka.
+Token mocka nie daje dostępu do prawdziwego kursu; wykonawcy nadal nie powinni
+mieć włączonego oficjalnego MCP. Konfiguracja: [`server/README.md`](server/README.md).
 
 ---
 

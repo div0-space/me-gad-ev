@@ -1,8 +1,9 @@
-# A practice course you can hand to a stranger
+# Private practice MCP for our agents
 
 Two imaginary lessons, two imaginary challenges, one shared state machine. A cardboard
-rook and a clockwork teacup let an agent rehearse the full course workflow without a
-course account, credentials, or upstream requests. Every fixture title and body begins
+rook and a clockwork teacup let our agents rehearse the full course workflow without
+official course credentials or upstream requests. The hosted instance is private
+to our team and requires its own Bearer token. Every fixture title and body begins
 with `MOCK-`; the only unprefixed fixture strings are synthetic challenge UUIDs and
 references to them. Read the entire source of that guarantee in
 [`fixtures_mock.json`](fixtures_mock.json#L1), and its recursive check in
@@ -59,6 +60,40 @@ SDK supplies initialization, discovery, and tool calls. The parent FastAPI lifes
 starts its session manager, as required by the
 [SDK mounting contract](https://github.com/modelcontextprotocol/python-sdk/blob/v1.30.0/README.md#mounting-to-an-existing-asgi-server).
 See [`create_mcp`](mcp_server.py#L14) and [`create_app`](app.py#L201).
+
+### Hosted private instance
+
+Our endpoint is `https://megadev.div0.space/mcp`, using Streamable HTTP and a
+team-only token supplied privately by the owner:
+
+```json
+{
+  "mcpServers": {
+    "megadev-private": {
+      "type": "http",
+      "url": "https://megadev.div0.space/mcp",
+      "headers": {
+        "Authorization": "Bearer <private-team-token>"
+      }
+    }
+  }
+}
+```
+
+Use the client's secure token/header configuration; do not commit a configured
+token or paste it into chat. Clients must support static Bearer authentication
+or custom HTTP headers. OAuth-only connectors are not supported by this endpoint.
+
+Missing or incorrect tokens receive HTTP `401`, `Cache-Control: no-store`,
+`WWW-Authenticate: Bearer realm="private-mcp"` and a JSON `private_mcp` error.
+The response explicitly identifies a private team service, names the
+`Authorization` header and states that OAuth is unsupported; it never includes
+the token. The same policy protects `/api/*`.
+
+This token grants access only to our synthetic practice service, not the
+official course. The Journal's human enrollment OAuth gate is separate and
+unchanged. Production policy is implemented by Caddy; see
+[`deploy/caddy-gate.snippet`](../deploy/caddy-gate.snippet).
 
 ## The workflow and its deliberate friction
 

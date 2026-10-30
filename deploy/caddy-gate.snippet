@@ -30,6 +30,35 @@
 # The gated entries live only under /srv/megadev-gated on the host — they are not in
 # the public repo. See server/README.md, "Course enrollment gate".
 
+# Private team MCP/API — REPLACE the existing Bearer handlers, do not duplicate them.
+# MEGADEV_MCP_TOKEN belongs in Caddy's private environment, never this repository.
+# The running installation may retain its existing private token configuration.
+# This static Bearer gate is NOT the official course OAuth enrollment gate.
+handle /mcp* {
+	@noauth not header Authorization "Bearer {$MEGADEV_MCP_TOKEN}"
+	handle @noauth {
+		header {
+			Content-Type application/json
+			Cache-Control no-store
+			WWW-Authenticate `Bearer realm="private-mcp"`
+		}
+		respond `{"error":"private_mcp","private":true,"message":"Private team MCP. Configure Authorization: Bearer <token> using the token supplied privately by the owner. OAuth sign-in is not supported here.","authentication":{"type":"bearer","header":"Authorization","scheme":"Bearer","oauth":false}}` 401
+	}
+	reverse_proxy 127.0.0.1:8000
+}
+handle /api/* {
+	@noauth_api not header Authorization "Bearer {$MEGADEV_MCP_TOKEN}"
+	handle @noauth_api {
+		header {
+			Content-Type application/json
+			Cache-Control no-store
+			WWW-Authenticate `Bearer realm="private-mcp"`
+		}
+		respond `{"error":"private_mcp","private":true,"message":"Private team MCP. Configure Authorization: Bearer <token> using the token supplied privately by the owner. OAuth sign-in is not supported here.","authentication":{"type":"bearer","header":"Authorization","scheme":"Bearer","oauth":false}}` 401
+	}
+	reverse_proxy 127.0.0.1:8000
+}
+
 # Block 1 — the gate's own endpoints, public, proxied to the app.
 @gate_api path /gate/handshake /gate/login /gate/callback /gate/check
 handle @gate_api {
