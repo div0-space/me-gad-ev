@@ -1,0 +1,55 @@
+# deploy/caddy-gate.snippet — OAuth course enrollment gate for S01 entries.
+# PROPOSAL ONLY. Nothing in this repo applies it; the operator pastes it (see below).
+#
+# What it does
+#   /members/* detailed records and /challenge/s01e0X/entry/ course entries ask
+#   the gate app (127.0.0.1:8000, GET /gate/check) before Caddy serves files from
+#   the SEPARATE root /srv/megadev-gated, never the public docs root.
+#   A valid `megadev_gate` cookie => 200 => the entry is served. Anything else =>
+#   redirect to /gate/?next=<path>. Teaser pages /challenge/s01e0X/, the index
+#   /challenge/ and all other static files are untouched and public.
+#
+# Operator steps
+#   1. Put the gate app's env in its unit/env file (never in the repo):
+#        GATE_SECRET=<openssl rand -hex 32>       # >= 16 chars, else the gate answers 503
+#        GATE_OAUTH_CLIENT_ID=<registered-production-client-id>
+#        GATE_OAUTH_REDIRECT_URI=https://megadev.div0.space/gate/callback
+#      Register the production callback separately; the local preview client is not deployable here.
+#      Behind HTTPS leave GATE_COOKIE_SECURE at its default (on).
+#   2. Paste the two blocks below INSIDE the `megadev.div0.space { ... }` site block, next to
+#      the existing static `root`/`file_server` and the Bearer-gated `/mcp*` and `/api/*`.
+#      The /gate/* endpoints must NOT sit behind the Bearer gate: visitors have no token.
+#      Adjust `root` in block 2 if the landing root differs from /srv/megadev-landing.
+#      Disable callback query logging or redact code/state before enabling this route.
+#   3. `caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy`
+#   4. Check:
+#        curl -si https://megadev.div0.space/challenge/s01e01/entry/ | head -3 # 302 -> /gate/?next=...
+#        curl -s  https://megadev.div0.space/gate/handshake                  # OAuth instructions
+#        curl -si https://megadev.div0.space/challenge/                       # 200, still public
+#
+# The gated entries live only under /srv/megadev-gated on the host — they are not in
+# the public repo. See server/README.md, "Course enrollment gate".
+
+# Block 1 — the gate's own endpoints, public, proxied to the app.
+@gate_api path /gate/handshake /gate/login /gate/callback /gate/check
+handle @gate_api {
+	reverse_proxy 127.0.0.1:8000
+}
+
+# Block 2 — the three gated pages. Note `redir *`: without the `*`, Caddy reads the target as a
+# path matcher and the redirect silently never fires (tested; the page then fails OPEN).
+# This block was run end to end against the gate app: 302 without cookie, 200 with, 502 if the
+# gate is down (closed). Revalidate the OAuth callback and /members addition before deployment.
+@gated path /members /members/* /challenge/s01e01/entry /challenge/s01e01/entry/* /challenge/s01e02/entry /challenge/s01e02/entry/* /challenge/s01e03/entry /challenge/s01e03/entry/*
+handle @gated {
+	forward_auth 127.0.0.1:8000 {
+		uri /gate/check
+		# Any non-2xx from the gate (401 closed, 503 unconfigured) sends the visitor to the gate page.
+		@denied status 4xx 5xx
+		handle_response @denied {
+			redir * /gate/?next={http.request.orig_uri.path} 302
+		}
+	}
+	root * /srv/megadev-gated
+	file_server
+}
